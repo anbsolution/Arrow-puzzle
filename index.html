@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0c1422">
+<meta name="description" content="Arrow Puzzle PRO — 100 levels, boss stages, daily challenges and offline puzzle gameplay.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arrow Puzzle PRO">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>Arrow Puzzle PRO ULTRA v8 — 100 Levels</title>
+<style>
+:root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+.install-btn{border:1px solid #2e8f79;background:#102d2b;color:#8fffe0;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:800;cursor:pointer;display:none}.install-btn.show{display:inline-flex}.pwa-status{font-size:10px;color:var(--muted);text-align:center;margin:6px 0 0}.app{max-width:780px;margin:auto;padding:15px 13px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.logo{font-size:21px;font-weight:950;letter-spacing:.5px}.logo span{color:var(--accent)}.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 9px;white-space:nowrap}
+h1{font-size:clamp(27px,7vw,39px);line-height:1.05;letter-spacing:-.8px;margin:25px 0 8px}.sub{font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 17px}
+.panel{background:linear-gradient(145deg,#1a2a43,#132036);border:1px solid #2a405d;border-radius:21px;padding:14px;box-shadow:0 15px 40px #0003}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px 2px}.field select{width:100%;background:#0d192a;color:var(--text);border:1px solid #354d6a;border-radius:12px;padding:11px 10px;font-size:14px;min-width:0}
+.featureline{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 2px}.chip{font-size:11px;font-weight:750;border:1px solid #334a65;background:#122036;color:#bfd0e7;padding:6px 8px;border-radius:999px}.chip.boss{color:var(--gold);border-color:#866c35;background:#342d20}.chip.active{color:var(--accent);border-color:#287b6a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}.stat{background:#0d192a;border:1px solid #273b56;border-radius:13px;text-align:center;padding:9px 3px}.stat strong{display:block;font-size:clamp(17px,4.5vw,22px);font-variant-numeric:tabular-nums}.stat small{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.board-wrap{display:flex;justify-content:center;padding:5px 0 12px}.board{width:min(100%,500px);aspect-ratio:1;display:grid;gap:4px;padding:7px;background:#091321;border:1px solid #2c405b;border-radius:16px;touch-action:manipulation}.cell{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:var(--tile);color:var(--accent);font-size:clamp(17px,5vw,32px);font-weight:900;cursor:pointer;user-select:none;padding:0;transition:transform .1s,background .15s,opacity .15s}.cell{transform-style:preserve-3d;box-shadow:inset 0 1px 0 #ffffff12,0 3px 0 #0003;transition:transform .18s,background .15s,opacity .15s,box-shadow .18s}.cell:active{transform:perspective(300px) rotateX(12deg) scale(.92)}.cell.pop{animation:popout .26s ease-out}.cell.empty{box-shadow:none}@keyframes popout{0%{transform:perspective(350px) translateZ(0) scale(1)}45%{transform:perspective(350px) translateZ(20px) rotateY(16deg) scale(1.12)}100%{transform:perspective(350px) translateZ(-8px) rotateY(-18deg) scale(.2);opacity:0}}.cell.empty{background:var(--empty);border-color:#17263b;cursor:default}.cell.hint{outline:3px solid var(--gold);background:#51462b;color:#fff0b0}.cell.blocked{color:var(--danger)}.cell:focus-visible,.btn:focus-visible,.lv:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.message{min-height:23px;text-align:center;color:var(--muted);font-size:13px;margin:0 0 10px}.message.good{color:var(--accent)}.message.warn{color:var(--gold)}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.btn{border:1px solid #354b67;border-radius:12px;padding:11px 7px;background:#263a55;color:var(--text);font-size:13px;font-weight:800;cursor:pointer}.btn.primary{background:var(--accent);color:#08251d;border-color:var(--accent)}.btn.gold{background:#4b3c20;color:#ffe6a1;border-color:#816632}.btn:disabled{opacity:.4;cursor:not-allowed}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #2b405b;background:#101d30;border-radius:12px;padding:10px}.toggle label{font-size:12px;color:var(--muted)}.toggle select{max-width:125px;background:#172840;color:var(--text);border:1px solid #3a506c;border-radius:8px;padding:7px;font-size:12px}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:23px 2px 10px}.sectionhead h2{font-size:18px;margin:0}.muted{font-size:11px;color:var(--muted)}.progressbar{height:7px;background:#26364c;border-radius:99px;overflow:hidden;margin:10px 2px 13px}.progressfill{height:100%;width:0;background:linear-gradient(90deg,#36c99d,#9fffe1);transition:width .25s}.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.lv{position:relative;background:#1a2a42;border:1px solid #304761;color:var(--text);border-radius:10px;padding:10px 0;font-weight:800;cursor:pointer}.lv.done{color:var(--accent);border-color:#28866e}.lv.current{background:var(--accent);color:#06271d;border-color:var(--accent)}.lv:disabled{opacity:.3;cursor:not-allowed}.lv small{display:block;font-size:9px;font-weight:600;opacity:.8}.info{font-size:12px;color:var(--muted);line-height:1.55;margin:12px 2px 0}.footer{text-align:center;font-size:11px;color:#7586a0;margin-top:22px}
+.menu-overlay{position:fixed;inset:0;background:#050a12d9;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}.menu-overlay.open{display:flex}.menu-card{width:min(100%,430px);background:#17263d;border:1px solid #3a526f;border-radius:22px;padding:20px;box-shadow:0 25px 70px #0009}.menu-card h2{margin:0 0 6px}.menu-card p{font-size:13px;color:var(--muted);line-height:1.5}.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.menu-grid .btn{padding:13px 8px}.coin{color:#ffd166}.skin-crystal .cell:not(.empty){text-shadow:0 0 8px #9cecff,0 0 18px #43d9ff;color:#a8f1ff}.skin-fire .cell:not(.empty){text-shadow:0 0 8px #ff7b42,0 0 16px #ff4d22;color:#ff9c62}.skin-gold .cell:not(.empty){text-shadow:0 0 8px #ffd166,0 0 16px #ffbd35;color:#ffe6a0}
+@media(min-width:570px){.app{padding-top:24px}.levels{grid-template-columns:repeat(10,1fr)}.actions{grid-template-columns:repeat(6,1fr)}}
+
+/* ULTRA v8: high-detail, responsive, GPU-friendly visual pass */
+:root{color-scheme:dark;--accent:#66ffe0;--line:#365575;--panel:#14243b}
+html{background:#070d18;scroll-behavior:smooth}
+body{isolation:isolate;overflow-x:hidden;background:radial-gradient(ellipse at 50% -15%,#315b80 0%,#14253e 32%,#080f1c 72%);background-attachment:fixed}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.22;transform:translateZ(0)}
+body:before{width:48vw;height:48vw;max-width:560px;max-height:560px;min-width:220px;min-height:220px;left:-18vw;top:18vh;background:#00e6c0}
+body:after{width:44vw;height:44vw;max-width:520px;max-height:520px;min-width:200px;min-height:200px;right:-18vw;top:58vh;background:#4d6cff}
+.app{max-width:1040px;padding:clamp(13px,2.7vw,30px) clamp(12px,2.5vw,26px) 38px}
+.top{position:relative;padding:12px 14px;border:1px solid #6b91b733;border-radius:18px;background:linear-gradient(115deg,#13253bd9,#0d1929d9);box-shadow:0 10px 35px #0003,inset 0 1px #ffffff14;backdrop-filter:blur(18px)}
+.logo{font-size:clamp(17px,2.4vw,25px);letter-spacing:.8px;text-shadow:0 0 22px #66ffe033}
+.logo span{background:linear-gradient(90deg,#6affd8,#7ad9ff 55%,#b5a5ff);color:transparent;background-clip:text;-webkit-background-clip:text}
+.tag{background:#0b1727b8;border-color:#6d93b44d;box-shadow:inset 0 1px #ffffff0c}
+h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,4vw,42px);text-shadow:0 6px 30px #0006}
+.sub{max-width:760px;font-size:clamp(13px,1.6vw,16px);color:#c0cee2}
+.panel{position:relative;overflow:hidden;background:linear-gradient(145deg,#1a2d48ed,#101c30f2 70%);border:1px solid #7395ba3d;border-radius:clamp(18px,2.7vw,28px);padding:clamp(12px,2vw,22px);box-shadow:0 22px 65px #0005,inset 0 1px #ffffff18;backdrop-filter:blur(18px)}
+.panel:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#a9fff0a6,#94b9ff77,transparent);pointer-events:none}
+.field select,.toggle select{box-shadow:inset 0 1px 4px #0004;transition:border-color .2s,box-shadow .2s}
+.field select:focus,.toggle select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px #66ffe01e}
+.chip{box-shadow:inset 0 1px #ffffff0b;letter-spacing:.2px}
+.stats{gap:clamp(6px,1vw,10px)}
+.stat{position:relative;overflow:hidden;background:linear-gradient(145deg,#0c192b,#13243a);border-color:#7394b52e;box-shadow:inset 0 1px #ffffff0c,0 5px 16px #0002;padding:clamp(9px,1.4vw,14px) 3px}
+.stat:before{content:"";position:absolute;inset:0 15% auto;height:1px;background:linear-gradient(90deg,transparent,#8fffff8a,transparent)}
+.stat strong{font-size:clamp(18px,3vw,27px);text-shadow:0 0 20px #66ffe025}
+.board-wrap{padding:clamp(7px,1.5vw,16px) 0 18px}
+.board{width:min(100%,620px);gap:clamp(3px,.65vw,6px);padding:clamp(6px,1vw,10px);border-radius:clamp(15px,2.4vw,24px);border-color:#8bb8df54;background:linear-gradient(145deg,#081321,#0a1728);box-shadow:0 20px 50px #0006,inset 0 1px #c9f4ff1b,inset 0 -10px 30px #0003;position:relative}
+.board:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,#9ceaff0a,transparent 35%,#8b9bff08 75%,transparent);}
+.cell{border-radius:clamp(6px,1vw,11px);font-size:clamp(17px,3.8vw,35px);background:linear-gradient(145deg,#294564,#192d47);border-color:#82b1d22b;box-shadow:inset 0 1px #ffffff20,inset 0 -3px 7px #07101d5c,0 3px 0 #050b14,0 5px 10px #0002;text-shadow:0 1px 0 #fff2;transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,opacity .15s,box-shadow .2s,border-color .2s}
+.cell:not(.empty):hover{border-color:#8cffe8a6;box-shadow:inset 0 1px #ffffff2b,0 0 0 1px #66ffe02b,0 0 20px #66ffe019,0 4px 0 #050b14;z-index:2}
+.cell.empty{background:linear-gradient(145deg,#0b1727,#0e1b2c);border-color:#31445a42}
+.cell.hint{outline:2px solid #ffdc72;box-shadow:0 0 0 4px #ffdc7221,0 0 28px #ffd16680,inset 0 1px #fff7}
+.cell.blocked{border-color:#ff727266;box-shadow:0 0 18px #ff72721f,inset 0 1px #ffffff15}
+.btn{position:relative;overflow:hidden;background:linear-gradient(145deg,#2a4260,#1b2e48);border-color:#7c9bbc40;box-shadow:inset 0 1px #ffffff14,0 4px 12px #0002;transition:transform .15s,filter .15s,box-shadow .15s}
+.btn:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 15%,#ffffff0c 48%,transparent 75%);transform:translateX(-120%);transition:transform .45s}
+.btn:hover:before{transform:translateX(120%)}.btn:hover{filter:brightness(1.12);box-shadow:inset 0 1px #ffffff22,0 7px 18px #0003}.btn:active{transform:translateY(1px) scale(.985)}
+.btn.primary{background:linear-gradient(120deg,#65f5c8,#8affed);box-shadow:0 5px 22px #66ffe02a,inset 0 1px #ffffffa8}
+.btn.gold{background:linear-gradient(145deg,#554421,#332a1b);border-color:#b9954b70}
+.progressbar{height:9px;background:#091626;border:1px solid #7693b22b;padding:1px}.progressfill{border-radius:99px;background:linear-gradient(90deg,#35d8a6,#7dffe0,#9ddaff);box-shadow:0 0 15px #66ffe055}
+.lv{background:linear-gradient(145deg,#1e3552,#15263e);box-shadow:inset 0 1px #ffffff0d,0 3px 8px #0002;transition:transform .15s,border-color .15s,filter .15s}.lv:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.13)}.lv.current{box-shadow:0 0 20px #66ffe03b,inset 0 1px #ffffff80}
+.menu-overlay{background:#030813e8;backdrop-filter:blur(16px)}.menu-card{background:linear-gradient(145deg,#1b304c,#101c30);border-color:#8ab1d34d;box-shadow:0 28px 90px #000a,inset 0 1px #ffffff18}
+.install-btn{box-shadow:0 0 20px #66ffe018,inset 0 1px #ffffff12}
+.footer{padding-top:15px;border-top:1px solid #9db9d01a}
+@media(min-width:760px){.app{max-width:1100px}.panel{padding:24px}.board-wrap{padding-top:18px}.board{width:min(100%,660px)}.controls{grid-template-columns:1fr 1fr}.actions{gap:10px}.btn{padding:13px 10px}}
+@media(max-width:390px){.logo{font-size:16px}.tag{font-size:9px;padding:6px}.top{padding:10px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat small{font-size:9px}.actions{gap:6px}.btn{font-size:12px;padding:10px 4px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+</style>
+</head>
+<body>
+<main class="app">
+ <header class="top"><div class="logo">➜ <span>ARROW</span> PUZZLE PRO</div><div style="display:flex;align-items:center;gap:7px"><button type="button" class="install-btn" id="installBtn">＋ Install</button><div class="tag">ULTRA EDITION · PWA</div></div></header><div class="pwa-status" id="pwaStatus" aria-live="polite">Checking app status…</div>
+ <h1>Think. Tap. Clear.</h1><p class="sub">Arrow ke saamne edge tak raasta khaali ho tabhi use tap karein. Board clear karke stars kamao, boss levels beat karo aur daily challenge try karo.</p>
+ <section class="panel">
+  <div class="controls">
+   <div class="field"><label for="levelSelect">LEVEL</label><select id="levelSelect"></select></div>
+   <div class="field"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
+  </div>
+  <div class="featureline"><span class="chip" id="modeChip">CLASSIC</span><span class="chip" id="bossChip">BOSS LEVEL: EVERY 10</span><span class="chip" id="dailyChip">DAILY: AVAILABLE</span><span class="chip active" id="coinChip">🪙 0 COINS</span></div>
+  <div class="stats">
+   <div class="stat"><strong id="remaining">0</strong><small>ARROWS LEFT</small></div>
+   <div class="stat"><strong id="moves">0</strong><small>MOVES</small></div>
+   <div class="stat"><strong id="timer">00:00</strong><small>TIME</small></div>
+   <div class="stat"><strong id="stars">☆☆☆</strong><small>LEVEL STARS</small></div>
+  </div>
+  <div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div>
+  <div id="message" class="message" aria-live="polite">Choose a level and start clearing arrows.</div>
+  <div class="actions">
+   <button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button>
+  </div>
+  <div class="sectionhead" style="margin-top:15px"><h2>Power-ups</h2><span class="muted">Limited use per board</span></div>
+  <div class="actions">
+   <button class="btn gold" id="scanBtn">👁 Scan (2)</button><button class="btn" id="burstBtn">⚡ Clear (1)</button><button class="btn" id="shieldBtn">🛡 Shield (1)</button>
+  </div>
+  <div class="options">
+   <div class="toggle"><label for="skin">BOARD THEME</label><select id="skin"><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="light">Light</option></select></div>
+   <div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div>
+   <div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div>
+  </div>
+  <div class="sectionhead" style="margin-top:15px"><h2>Save Backup</h2><span class="muted">Move progress between browsers</span></div>
+  <div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div>
+  <input id="importFile" type="file" accept="application/json,.json" hidden>
+  <p class="info">💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
+ </section>
+ <div class="sectionhead"><h2>Daily Rewards</h2><span class="muted">Claim once per day</span></div>
+ <section class="panel" style="padding:12px">
+  <div class="row"><div><strong id="rewardTitle">🎁 Daily login reward</strong><div class="muted" id="rewardText">Claim coins to unlock arrow skins.</div></div><button class="btn primary" id="claimBtn" type="button">Claim +10 🪙</button></div>
+ </section>
+ <div class="sectionhead"><h2>Level Map</h2><span class="muted" id="progressText">0 / 100 complete</span></div>
+ <div class="progressbar"><div id="progressFill" class="progressfill"></div></div>
+ <div id="levels" class="levels"></div>
+ <div class="sectionhead"><h2>Achievements</h2><span class="muted">Unlock as you play</span></div>
+ <section class="panel" style="padding:12px">
+  <div id="achievements" class="featureline"></div>
+  <div class="stats" style="margin-bottom:0">
+   <div class="stat"><strong id="totalWins">0</strong><small>WINS</small></div>
+   <div class="stat"><strong id="totalStars">0</strong><small>STARS</small></div>
+   <div class="stat"><strong id="bestStreak">0</strong><small>DAILY STREAK</small></div>
+   <div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div>
+  </div>
+ </section>
+ <div class="footer">ARROW PUZZLE PRO · Single HTML · Mobile-first · Offline ready</div>
+</main>
+<script>
+(()=> {
+ 'use strict';
+ const $=id=>document.getElementById(id);
+ const dirs=[{x:0,y:-1,ch:'↑',name:'up'},{x:1,y:0,ch:'→',name:'right'},{x:0,y:1,ch:'↓',name:'down'},{x:-1,y:0,ch:'←',name:'left'}];
+ const configs={easy:{size:5,density:.53},medium:{size:6,density:.66},hard:{size:7,density:.72}};
+ const themes={
+  neon:{bg:'#091321',tile:'#20334d',empty:'#101b2d',line:'#304660',accent:'#5df0c2',text:'#f3f7ff'},
+  ocean:{bg:'#071c2b',tile:'#12445a',empty:'#0a2939',line:'#236079',accent:'#77e6ff',text:'#effcff'},
+  sunset:{bg:'#241421',tile:'#573044',empty:'#281a2a',line:'#74445a',accent:'#ffbd85',text:'#fff4ee'},
+  light:{bg:'#e8eef6',tile:'#d8e3f0',empty:'#f7f9fc',line:'#b7c7db',accent:'#087e70',text:'#15243a'}
+ };
+ let level=1,diff='easy',mode='classic',size=5,cells=[],moves=0,hintIndex=-1,finished=false,history=[],soundOn=true,boardVersion=0;
+ let startedAt=0,elapsedBefore=0,timerHandle=null,dailyFinished=false,power={scan:2,burst:1,shield:1},shieldReady=false,scanActive=false;
+ const storeKey='arrowPuzzlePro_v3';
+ let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',coins:0,claimedDay:'',unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
+ try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(x&&typeof x==='object')saved={...saved,...x,levels:x.levels||{},daily:x.daily||{},stats:x.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:x.achievements||{},unlockedSkins:x.unlockedSkins||['classic'],coins:x.coins||0,claimedDay:x.claimedDay||'',arrowSkin:x.arrowSkin||'classic'};}catch(e){}
+ const id=()=>mode==='daily'?`daily-${today()}-${diff}`:`${level}-${diff}`;
+ const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+ const record=()=>mode==='daily'?saved.daily[id()]:saved.levels[id()];
+ function persist(){try{localStorage.setItem(storeKey,JSON.stringify(saved));}catch(e){}}
+ function msg(t,cls=''){$('message').textContent=t;$('message').className='message '+cls;}
+ function randGen(seed){let s=seed>>>0;return()=>{s=(1664525*s+1013904223)>>>0;return s/4294967296;};}
+ function clearRay(c,arr=cells){
+  let x=c.x+c.d.x,y=c.y+c.d.y;
+  while(x>=0&&x<size&&y>=0&&y<size){
+   if(arr.some(o=>!o.gone&&o.x===x&&o.y===y))return false;
+   x+=c.d.x;y+=c.d.y;
+  }
+  return true;
+ }
+ function makeBoard(){
+  const boss=mode==='classic'&&level%10===0;
+  size=boss?8:configs[diff].size;
+  let density=boss?0.79:configs[diff].density;
+  let seed=mode==='daily'?Number(today().replaceAll('-',''))*7+(diff==='easy'?31:diff==='medium'?62:93)+boardVersion*7919:
+   level*99991+(diff==='easy'?101:diff==='medium'?202:303)+boardVersion*7919;
+  const rnd=randGen(seed);
+  // Insert arrows one by one only when each new arrow can exit. Removing them in reverse insertion order always solves the board.
+  const positions=[];
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++)positions.push({x,y});
+  for(let i=positions.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[positions[i],positions[j]]=[positions[j],positions[i]];}
+  cells=[];
+  for(const pos of positions){
+   if(rnd()>density)continue;
+   const options=[...dirs];for(let i=options.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[options[i],options[j]]=[options[j],options[i]];}
+   for(const d of options){
+    const c={...pos,d,gone:false};
+    if(clearRay(c,cells)){cells.push(c);break;}
+   }
+  }
+  // Ensure a sensible board density for the selected mode.
+  if(cells.length<5){
+   for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(!cells.some(c=>c.x===x&&c.y===y)){
+    const d=y===0?dirs[0]:x===size-1?dirs[1]:y===size-1?dirs[2]:x===0?dirs[3]:dirs[(x+y+level)%4];
+    cells.push({x,y,d,gone:false});if(cells.length>=Math.max(8,size*2))break;
+   }
+  }
+ }
+ function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null;}}
+ function getTime(){return elapsedBefore+(startedAt?Math.floor((Date.now()-startedAt)/1000):0);}
+ function fmt(s){s=Math.max(0,s|0);return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+ function startTimer(){stopTimer();startedAt=Date.now();timerHandle=setInterval(()=>{$('timer').textContent=fmt(getTime());},500);}
+ function starsFor(t,m){const fast=Math.max(20,cells.length*3),steady=Math.max(45,cells.length*6);if(t<=fast)return 3;if(t<=steady)return 2;return 1;}
+ function applyTheme(name){
+  const t=themes[name]||themes.neon;const r=document.documentElement;
+  r.style.setProperty('--bg',t.bg);r.style.setProperty('--tile',t.tile);r.style.setProperty('--empty',t.empty);r.style.setProperty('--line',t.line);r.style.setProperty('--accent',t.accent);r.style.setProperty('--text',t.text);
+  saved.theme=name;persist();
+ }
+ function render(){
+  const board=$('board');board.style.gridTemplateColumns=`repeat(${size},1fr)`;board.innerHTML='';document.body.classList.remove('skin-crystal','skin-fire','skin-gold');if(saved.arrowSkin&&saved.arrowSkin!=='classic')document.body.classList.add('skin-'+saved.arrowSkin);
+  const map=new Map(cells.map((c,i)=>[`${c.x},${c.y}`,{c,i}]));
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+   const item=map.get(`${x},${y}`),c=item?.c,i=item?.i;
+   const b=document.createElement('button');b.type='button';
+   b.className='cell'+(!c||c.gone?' empty':'')+(c&&i===hintIndex?' hint':'')+(c&&!c.gone&&scanActive&&clearRay(c)?' hint':'');
+   b.textContent=c&&!c.gone?c.d.ch:'';
+   b.setAttribute('aria-label',c&&!c.gone?`Arrow ${c.d.name}`:'Empty cell');
+   b.disabled=!c||c.gone||finished;
+   if(c&&!c.gone)b.addEventListener('click',()=>tap(i));
+   board.appendChild(b);
+  }
+  const left=cells.filter(c=>!c.gone).length;
+  $('remaining').textContent=left;$('moves').textContent=moves;$('timer').textContent=fmt(getTime());
+  const rec=record();$('stars').textContent=rec?.stars?'★'.repeat(rec.stars)+'☆'.repeat(3-rec.stars):'☆☆☆';
+  $('levelSelect').value=String(level);$('difficulty').value=diff;$('dailyMode').value=mode;
+  $('modeChip').textContent=mode==='daily'?'DAILY CHALLENGE':'CLASSIC';
+  $('modeChip').className='chip '+(mode==='daily'?'active':'');
+  $('bossChip').textContent=mode==='classic'&&level%10===0?'👑 BOSS LEVEL':'BOSS: EVERY 10';
+  $('bossChip').className='chip '+(mode==='classic'&&level%10===0?'boss':'');
+  $('dailyChip').textContent=`DAILY · ${today()}`;$('coinChip').textContent=`🪙 ${saved.coins||0} COINS`;$('arrowSkin').value=saved.arrowSkin||'classic';
+  $('soundBtn').textContent=soundOn?'🔊 Sound On':'🔇 Sound Off';
+  renderLevels();
+ }
+ function unlocked(n){
+  if(n===1)return true;
+  for(const d of Object.keys(configs))if(saved.levels[`${n-1}-${d}`]?.complete)return true;
+  return false;
+ }
+ function renderLevels(){
+  const box=$('levels');box.innerHTML='';
+  let completed=0;
+  for(let n=1;n<=100;n++){
+   const all=Object.keys(configs).every(d=>saved.levels[`${n}-${d}`]?.complete);
+   if(all)completed++;
+   const b=document.createElement('button');b.className='lv'+(n===level&&mode==='classic'?' current':'')+(all?' done':'');
+   b.disabled=!unlocked(n);b.innerHTML=`${unlocked(n)?n:'🔒'}${n%10===0?'<small>👑 BOSS</small>':''}`;
+   b.addEventListener('click',()=>{level=n;mode='classic';$('dailyMode').value=mode;resetGame();window.scrollTo({top:0,behavior:'smooth'});});
+   box.appendChild(b);
+  }
+  $('progressText').textContent=`${completed} / 100 complete`;
+  $('progressFill').style.width=`${completed}%`;
+ }
+ function resetGame(){
+  stopTimer();moves=0;hintIndex=-1;finished=false;history=[];elapsedBefore=0;startedAt=0;
+  if(mode==='daily'&&saved.daily[id()]?.complete){dailyFinished=true;msg('Aaj ka Daily Challenge complete ho chuka hai. Replay karke apna score improve karo.');}
+  else {dailyFinished=false;msg(mode==='daily'?`Daily Challenge · ${diff} · ${today()}`:`Level ${level} · ${diff[0].toUpperCase()+diff.slice(1)}${level%10===0?' · BOSS FIGHT':''}`);}
+  makeBoard();startTimer();render();
+ }
+ function playTone(freq=600,duration=.07){
+  if(!soundOn)return;
+  try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.value=.04;osc.connect(gain);gain.connect(ctx.destination);osc.start();gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.stop(ctx.currentTime+duration);osc.onended=()=>ctx.close();}catch(e){}
+ }
+ function tap(i){
+  const c=cells[i];if(!c||c.gone||finished)return;
+  if(!clearRay(c)){if(shieldReady){shieldReady=false;msg('🛡 Shield ne blocked move ko protect kiya.','good');playTone(360,.08);}else{msg('Raasta blocked hai. Pehle saamne wala arrow hatao.','warn');playTone(180,.08);}return;}
+  history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});
+  c.gone=true;moves++;hintIndex=-1;scanActive=false;playTone(680,.045);
+  if(cells.every(v=>v.gone))completeGame();
+  else msg('Nice move! Agla clear arrow dhoondo.','good');
+  render();
+ }
+ function completeGame(){
+  finished=true;stopTimer();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
+  const entry={complete:true,stars:Math.max(stars,old?.stars||0),bestMoves:Math.min(moves,old?.bestMoves??Infinity),bestTime:Math.min(t,old?.bestTime??Infinity),lastTime:t};
+  if(mode==='daily')saved.daily[k]=entry;else saved.levels[k]=entry;
+  persist();msg(`🎉 ${mode==='daily'?'Daily Challenge':'Level '+level} complete! ${'★'.repeat(stars)} · ${moves} moves · ${fmt(t)}`,'good');playTone(880,.18);
+ }
+ $('levelSelect').innerHTML=Array.from({length:100},(_,i)=>`<option value="${i+1}">Level ${i+1}${(i+1)%10===0?' · Boss':''}</option>`).join('');
+ $('levelSelect').addEventListener('change',e=>{level=+e.target.value;mode='classic';$('dailyMode').value=mode;resetGame();});
+ $('difficulty').addEventListener('change',e=>{diff=e.target.value;resetGame();});
+ $('dailyMode').addEventListener('change',e=>{mode=e.target.value;resetGame();});
+ $('skin').addEventListener('change',e=>applyTheme(e.target.value));
+ $('arrowSkin').addEventListener('change',e=>{
+  const skin=e.target.value;const prices={classic:0,crystal:20,fire:35,gold:50};
+  if(!(saved.unlockedSkins||['classic']).includes(skin)){
+   const cost=prices[skin]||999;
+   if((saved.coins||0)<cost){msg(`Is skin ke liye ${cost} coins chahiye.`,'warn');$('arrowSkin').value=saved.arrowSkin||'classic';return;}
+   saved.coins-=cost;saved.unlockedSkins.push(skin);msg(`${skin} skin unlock ho gayi!`,'good');
+  }else msg(`${skin} arrow skin selected.`,'good');
+  saved.arrowSkin=skin;persist();render();
+ });
+ $('claimBtn').addEventListener('click',()=>{
+  if(saved.claimedDay===today()){msg('Aaj ka daily reward pehle hi claim kar liya.','warn');return;}
+  saved.claimedDay=today();saved.coins=(saved.coins||0)+10;persist();render();
+  $('rewardTitle').textContent='🎉 Reward claimed!';$('rewardText').textContent='10 coins added. Level complete karke aur coins kamao.';
+  $('claimBtn').textContent='Claimed today';$('claimBtn').disabled=true;msg('Daily login reward: +10 coins!','good');playTone(900,.12);
+ });
+ $('exportBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='arrow-puzzle-save-'+today()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);msg('Save backup file download ho rahi hai.','good');
+ });
+ $('importBtn').addEventListener('click',()=>$('importFile').click());
+ $('importFile').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  try{const data=JSON.parse(await file.text());if(!data||typeof data!=='object'||!data.levels||!data.daily||!data.stats)throw new Error('invalid');
+   if(!confirm('Import karne se current game progress replace ho jayega. Continue?'))return;
+   saved={...saved,...data,levels:data.levels,daily:data.daily,stats:data.stats,unlockedSkins:Array.isArray(data.unlockedSkins)?data.unlockedSkins:['classic'],achievements:data.achievements||{}};persist();applyTheme(saved.theme||'neon');render();msg('Save backup successfully import ho gaya.','good');
+  }catch(err){msg('Backup file valid nahi hai. Export ki hui JSON file select karein.','warn');}finally{e.target.value='';}
+ });
+ $('resetSaveBtn').addEventListener('click',()=>{if(!confirm('Kya aap sure hain? Saare levels, coins aur achievements reset ho jayenge.'))return;localStorage.removeItem(storeKey);location.reload();});
+ $('menuBtn').addEventListener('click',()=>openMenu());
+ function openMenu(){ $('menuOverlay').classList.add('open'); }
+ function closeMenu(){ $('menuOverlay').classList.remove('open'); }
+ $('closeMenu').addEventListener('click',closeMenu);
+ $('menuRestart').addEventListener('click',()=>{closeMenu();resetGame();});
+ $('menuDaily').addEventListener('click',()=>{closeMenu();mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});});
+ $('menuContinue').addEventListener('click',closeMenu);$('menuLevels').addEventListener('click',()=>{closeMenu();document.getElementById('levels').scrollIntoView({behavior:'smooth',block:'start'});});
+ $('menuOverlay').addEventListener('click',e=>{if(e.target===$('menuOverlay'))closeMenu();});
+
+
+ $('scanBtn').addEventListener('click',()=>{
+  if(finished)return;if(power.scan<=0){msg('Scan power-up khatam ho gaya.','warn');return;}
+  power.scan--;scanActive=true;render();msg('Scan active: sabhi available arrows highlight kiye gaye hain.','good');$('scanBtn').textContent=`👁 Scan (${power.scan})`;playTone(760,.08);
+ });
+ $('burstBtn').addEventListener('click',()=>{
+  if(finished)return;if(power.burst<=0){msg('Clear power-up khatam ho gaya.','warn');return;}
+  const i=cells.findIndex(c=>!c.gone&&clearRay(c));if(i<0){msg('Abhi koi clear arrow nahi hai.','warn');return;}
+  power.burst--;history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});cells[i].gone=true;moves++;hintIndex=-1;scanActive=false;
+  $('burstBtn').textContent=`⚡ Clear (${power.burst})`;playTone(820,.08);
+  if(cells.every(v=>v.gone))completeGame();else msg('Power-up used: ek available arrow clear hua.','good');render();
+ });
+ $('shieldBtn').addEventListener('click',()=>{
+  if(finished)return;if(power.shield<=0){msg('Shield power-up khatam ho gaya.','warn');return;}
+  power.shield--;shieldReady=true;$('shieldBtn').textContent=`🛡 Shield (${power.shield})`;msg('Shield active: agla blocked tap penalty ke bina protect hoga.','good');playTone(500,.08);
+ });
+ $('hintBtn').addEventListener('click',()=>{
+  if(finished)return;
+  hintIndex=cells.findIndex(c=>!c.gone&&clearRay(c));
+  if(hintIndex<0){msg('Koi valid move nahi mila. Restart karke dekhein.','warn');return;}
+  render();msg('Gold highlight wale arrow par tap karein.','good');playTone(740,.06);
+ });
+ $('undoBtn').addEventListener('click',()=>{
+  if(!history.length||finished){msg('Undo ke liye koi pichhla move nahi hai.','warn');return;}
+  const prev=history.pop();cells=prev.cells;moves=prev.moves;hintIndex=-1;render();msg('Pichhla move undo ho gaya.','good');playTone(420,.05);
+ });
+ $('restartBtn').addEventListener('click',resetGame);
+ $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
+ $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
+ $('nextBtn').addEventListener('click',()=>{
+  if(mode==='daily'){mode='classic';$('dailyMode').value=mode;}
+  if(level<100){level=Math.min(100,level+1);resetGame();window.scrollTo({top:0,behavior:'smooth'});}
+  else {msg('Aap Level 100 par hain! Difficulty badal kar ya Daily Challenge khel kar dekhein.','good');}
+ });
+ document.addEventListener('keydown',e=>{
+  if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+  if(e.key.toLowerCase()==='h')$('hintBtn').click();
+  if(e.key.toLowerCase()==='u')$('undoBtn').click();
+  if(e.key.toLowerCase()==='r')$('restartBtn').click();
+ });
+ soundOn=saved.sound!==false;$('skin').value=saved.theme||'neon';applyTheme(saved.theme||'neon');
+ resetGame();
+})();
+</script>
+
+<script>
+(()=>{
+  const installBtn=document.getElementById('installBtn');
+  const status=document.getElementById('pwaStatus');
+  let installPrompt=null;
+  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+  function updateStatus(){
+    if(standalone()){status.textContent='Installed app · '+(navigator.onLine?'Online':'Offline ready');installBtn.classList.remove('show');}
+    else status.textContent=(navigator.onLine?'Online':'Offline')+' · Add to Home Screen for app-like play';
+  }
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;if(!standalone())installBtn.classList.add('show');});
+  window.addEventListener('appinstalled',()=>{installPrompt=null;installBtn.classList.remove('show');status.textContent='Arrow Puzzle PRO ULTRA installed successfully.';});
+  installBtn.addEventListener('click',async()=>{
+    if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.remove('show');}
+    else {status.textContent='Chrome menu (⋮) → Add to Home screen / Install app.';}
+  });
+  window.addEventListener('online',updateStatus);window.addEventListener('offline',updateStatus);updateStatus();
+  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(()=>{status.textContent=(standalone()?'Installed app':'PWA ready')+' · Offline cache enabled';}).catch(()=>{status.textContent='PWA cache could not start; online play is still available.';}));
+  } else if(location.protocol==='file:') status.textContent='Preview mode · Host on HTTPS to enable PWA install and offline cache';
+})();
+</script>
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 {
   "name": "arrow-puzzle-ultra-android",
-  "version": "17.0.0",
+  "version": "18.1.0",
   "private": true,
-  "description": "Capacitor Android wrapper for Arrow Puzzle ULTRA v17 with Pro options",
+  "description": "Arrow Puzzle ULTRA Pro MAX v18.1 with animated UI and separate ambient music and sound-effect controls",
   "scripts": {
     "android:sync": "cap sync android",
     "android:open": "cap open android"

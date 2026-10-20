@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#edf6ff">
-<title>Arrow Puzzle ULTRA v16 — Android App Edition</title>
+<title>Arrow Puzzle ULTRA Pro MAX v18.1 — Android App Edition</title>
 <style>
 :root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
@@ -151,11 +151,138 @@ body.pro-direction-labels .cell:not(.empty)::after{content:attr(data-direction);
 body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 @media(min-width:560px){.pro-options{grid-template-columns:repeat(2,minmax(0,1fr))}.pro-option:last-child{grid-column:1/-1}}
 
+
+/* ULTRA v18.2 — premium mobile UI polish */
+:root{
+  --v182-blue:#0879ee;
+  --v182-blue2:#12b5ee;
+  --v182-ink:#102247;
+  --v182-muted:#6b7d98;
+  --v182-border:#d9e8f8;
+  --v182-glass:rgba(255,255,255,.88);
+}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(ellipse at 50% -12%,rgba(112,190,255,.32),transparent 48%),
+    linear-gradient(180deg,#edf6ff 0%,#f7fbff 58%,#eef6ff 100%) !important;
+}
+.app{isolation:isolate}
+.top{
+  position:relative;
+  gap:9px;
+  border-radius:20px !important;
+  background:var(--v182-glass) !important;
+  border:1px solid rgba(211,231,251,.95) !important;
+  box-shadow:0 10px 28px rgba(31,87,145,.09) !important;
+}
+.logo{line-height:1.15}
+.tag{box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+h1{
+  text-wrap:balance;
+  text-shadow:0 2px 0 rgba(255,255,255,.8);
+}
+.sub{max-width:46ch}
+.panel{
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 14px 34px rgba(35,83,133,.09) !important;
+}
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
+  pointer-events:none;
+}
+.stats .stat{
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.stats .stat:active{transform:scale(.98)}
+.board{
+  outline:1px solid rgba(255,255,255,.85);
+  box-shadow:0 16px 34px rgba(24,68,117,.10) !important;
+}
+.cell:not(.empty){-webkit-user-select:none;user-select:none}
+.cell.hint{
+  animation:v182-hint-pulse 1.05s ease-in-out infinite alternate;
+}
+@keyframes v182-hint-pulse{
+  from{box-shadow:0 0 0 2px rgba(8,121,238,.22),0 0 0 6px rgba(8,121,238,.07)!important}
+  to{box-shadow:0 0 0 3px rgba(8,121,238,.45),0 0 0 9px rgba(8,121,238,.12)!important}
+}
+.btn,.icon-btn,.lv{
+  -webkit-tap-highlight-color:transparent;
+}
+.btn{
+  min-height:42px;
+  transition:transform .14s ease,filter .14s ease,box-shadow .14s ease;
+}
+.btn:not(:disabled):active{transform:translateY(1px) scale(.975)}
+.btn.primary{
+  background-image:linear-gradient(115deg,var(--v182-blue),var(--v182-blue2)) !important;
+}
+.lv{
+  min-height:42px;
+  transition:transform .14s ease,box-shadow .14s ease,background .14s ease;
+}
+.lv:not(:disabled):active{transform:scale(.95)}
+.lv.current{position:relative}
+.lv.current::after{
+  content:"CURRENT";
+  position:absolute;
+  left:50%;bottom:2px;
+  transform:translateX(-50%);
+  font-size:6px;letter-spacing:.55px;line-height:1;
+  font-weight:1000;opacity:.8;white-space:nowrap;
+}
+.menu-card,.overlay-card,.home-card{
+  box-shadow:0 26px 85px rgba(12,45,91,.28) !important;
+}
+.menu-card,.overlay-card{overscroll-behavior:contain}
+.menu-card .btn,.overlay-card .btn{min-height:44px}
+.icon-btn{
+  display:inline-grid;
+  place-items:center;
+  transition:transform .14s ease,background .14s ease;
+}
+.icon-btn:active{transform:scale(.94)}
+.message{transition:background .2s ease,color .2s ease}
+button:focus-visible,select:focus-visible{
+  outline:3px solid #77bfff !important;
+  outline-offset:2px;
+}
+@media(min-width:570px){
+  .app{padding-bottom:38px}
+  .panel{padding:17px !important}
+  .board{border-radius:27px !important}
+}
+@media(max-width:380px){
+  .top{padding:8px 9px}
+  .logo{letter-spacing:-.55px}
+  .panel{border-radius:21px !important;padding:11px !important}
+  .board{padding:6px !important;border-radius:20px !important}
+  .btn{font-size:12px !important}
+}
+@media(max-height:600px) and (orientation:landscape){
+  .app{padding-top:8px;padding-bottom:12px}
+  h1{margin-top:12px}
+  .sub{margin-bottom:9px}
+  .board{width:min(72vw,62vh,430px) !important}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cell.hint{animation:none!important}
+  .btn,.icon-btn,.lv,.stats .stat{transition:none!important}
+}
+
 </style>
+ <link rel="stylesheet" href="./pro-max-v18.css">
 </head>
 <body>
 <main class="app">
- <header class="top"><div class="logo">➜ <span>ARROW</span> PUZZLE ULTRA</div><div class="top-right"><div class="tag">500 LEVELS · OFFLINE</div><button class="icon-btn" id="homeBtn" aria-label="Open home dashboard">⌂</button><button class="icon-btn" id="menuBtn" aria-label="Open game menu">☰</button></div></header>
+ <header class="top"><div class="logo">➜ <span>ARROW</span> PUZZLE ULTRA</div><div class="top-right"><div class="tag">500 LEVELS · OFFLINE</div><button class="icon-btn" id="homeBtn" aria-label="Open home dashboard">⌂</button><button class="icon-btn" id="menuBtn" aria-label="Open game menu">☰</button><button class="icon-btn" id="settingsBtn" aria-label="Open settings">⚙</button></div></header>
  <h1>Tap Away <span class="title-blue">Arrows</span></h1><p class="sub">Look. Think. Tap. Clear! Arrow ke saamne raasta khaali ho tabhi use tap karein. Har level mein naye logic challenges unlock karein.</p>
  <section class="panel">
   <div class="controls">
@@ -239,7 +366,7 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
    <div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div>
   </div>
  </section>
- <div class="footer">ARROW PUZZLE ULTRA v17 · ULTRA PRO OPTIONS · ANDROID APP EDITION · 500 LEVELS</div>
+ <div class="footer">ARROW PUZZLE ULTRA PRO MAX v18.1 · AUDIO OPTIONS · ANDROID APP EDITION · 500 LEVELS</div>
 </main>
 <div class="overlay" id="homeOverlay" role="dialog" aria-modal="true" aria-labelledby="homeTitle">
  <section class="overlay-card home-card">
@@ -269,6 +396,23 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
  <section class="overlay-card"><div class="overlay-emoji">🏆</div><h2 id="completeTitle">Level Completed!</h2><div id="completeStars" style="font-size:30px;color:#f5b800;letter-spacing:3px">★★★</div><p id="completeSubtitle">Brilliant! You cleared every arrow.</p>
   <div class="overlay-stats"><div class="overlay-stat"><strong id="completeMoves">0</strong><small>MOVES</small></div><div class="overlay-stat"><strong id="completeTime">00:00</strong><small>TIME</small></div><div class="overlay-stat"><strong id="completeCoins">+0</strong><small>COINS</small></div></div>
   <div class="overlay-actions"><button class="btn" id="completeHome">⌂ Home</button><button class="btn" id="completeReplay">↻ Replay</button><button class="btn primary wide" id="completeNext">▶ Next Level</button></div>
+ </section>
+</div>
+
+<div class="overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+ <section class="overlay-card">
+  <div class="row"><div><h2 id="settingsTitle">⚙️ Pro MAX Settings</h2><p class="settings-intro">Personalize the look, feedback and motion of your game.</p></div><button class="icon-btn" id="closeSettings" aria-label="Close settings">×</button></div>
+  <div class="settings-list">
+   <label class="settings-row"><span class="setting-copy"><strong>Background music</strong><small>Soft optional music while you play</small></span><input type="checkbox" id="settingMusic"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Sound effects</strong><small>Tap and reward audio feedback</small></span><input type="checkbox" id="settingSound"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Vibration / haptics</strong><small>Short feedback on supported devices</small></span><input type="checkbox" id="settingHaptics"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Animated interface</strong><small>Background glow, board motion and celebrations</small></span><input type="checkbox" id="settingAnimations"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Reduced motion</strong><small>Minimize movement and visual effects</small></span><input type="checkbox" id="settingReducedMotion"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Large touch controls</strong><small>Make taps easier on mobile</small></span><input type="checkbox" id="settingLargeControls"></label>
+   <label class="settings-row"><span class="setting-copy"><strong>Board theme</strong><small>Apply a saved color palette</small></span><select id="settingTheme"><option value="light">Light Blue</option><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option></select></label>
+  </div>
+  <div class="overlay-actions"><button class="btn" id="settingsResetMotion">Reset visual effects</button><button class="btn primary" id="settingsDone">Done</button></div>
+  <p class="settings-foot">Settings are saved locally on this device. No account is required.</p>
  </section>
 </div>
 <script>
@@ -416,6 +560,7 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
    const item=map.get(`${x},${y}`),c=item?.c,i=item?.i;
    const b=document.createElement('button');b.type='button';
    b.className='cell'+(!c||c.gone?' empty':'')+(c&&i===hintIndex?' hint':'')+(c&&!c.gone&&scanActive&&clearRay(c)?' hint':'');
+   b.style.setProperty('--cell-index',String(y*size+x));
    b.textContent=c&&!c.gone?c.d.ch:'';
    b.setAttribute('aria-label',c&&!c.gone?`Arrow ${c.d.name}`:'Empty cell');if(c&&!c.gone)b.setAttribute('data-direction',c.d.name);
    b.disabled=!c||c.gone||finished;
@@ -532,7 +677,7 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
   $('completeStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
   $('completeSubtitle').textContent=`${mode==='daily'?'Daily Challenge complete!':`Level ${level} complete!`} ${stars===3?'Perfect run!':stars===2?'Great work!':'Nice effort!'}`;
   $('completeMoves').textContent=String(moves);$('completeTime').textContent=fmt(t);$('completeCoins').textContent='+'+coinReward;
-  $('completeNext').textContent=level>=500?'▶ Play Daily Challenge':'▶ Next Level';$('completeOverlay').classList.add('open');
+  $('completeNext').textContent=level>=500?'▶ Play Daily Challenge':'▶ Next Level';$('completeOverlay').classList.add('open');celebrate();
  }
  $('levelSelect').innerHTML=Array.from({length:500},(_,i)=>`<option value="${i+1}">Level ${i+1}${(i+1)%10===0?' · Boss':''}</option>`).join('');
  $('levelSelect').addEventListener('change',e=>{level=+e.target.value;mode='classic';$('dailyMode').value=mode;resetGame();});
@@ -632,7 +777,7 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
  $('pauseRestart').addEventListener('click',()=>{resetGame();});
  $('pauseHome').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');openHome();});
  $('pauseOverlay').addEventListener('click',e=>{if(e.target===$('pauseOverlay'))resumeGame();});
- document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!finished&&!paused)pauseGame(true);}else if(paused){$('pauseOverlay').classList.add('open');}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){stopAmbientMusic();if(!finished&&!paused)pauseGame(true);}else{if(saved.musicOn)startAmbientMusic();if(paused)$('pauseOverlay').classList.add('open');}});
  $('restartBtn').addEventListener('click',resetGame);
  $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
@@ -652,7 +797,82 @@ body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-mot
   if(e.key.toLowerCase()==='u')$('undoBtn').click();
   if(e.key.toLowerCase()==='r')$('restartBtn').click();
  });
- soundOn=saved.sound!==false;applyProOptions();$('skin').value=saved.theme||'neon';applyTheme(saved.theme||'neon');
+
+
+let ambientContext=null,ambientTimer=null,ambientStep=0;
+function stopAmbientMusic(){
+ if(ambientTimer!==null){clearInterval(ambientTimer);ambientTimer=null;}
+ if(ambientContext){try{ambientContext.close();}catch(e){}ambientContext=null;}
+}
+function startAmbientMusic(){
+ stopAmbientMusic();
+ if(!saved.musicOn || document.hidden)return;
+ const AC=window.AudioContext||window.webkitAudioContext;
+ if(!AC)return;
+ try{
+  ambientContext=new AC();
+  if(ambientContext.state==='suspended')ambientContext.resume();
+  const notes=[220,261.63,329.63,293.66,196,246.94,293.66,261.63];
+  const playNote=()=>{
+   if(!ambientContext||ambientContext.state==='closed')return;
+   const t=ambientContext.currentTime,osc=ambientContext.createOscillator(),gain=ambientContext.createGain();
+   osc.type='sine';osc.frequency.value=notes[ambientStep++%notes.length];
+   gain.gain.setValueAtTime(0.0001,t);gain.gain.exponentialRampToValueAtTime(0.018,t+0.12);gain.gain.exponentialRampToValueAtTime(0.0001,t+0.72);
+   osc.connect(gain);gain.connect(ambientContext.destination);osc.start(t);osc.stop(t+0.75);
+   osc.addEventListener('ended',()=>{try{osc.disconnect();gain.disconnect();}catch(e){}},{once:true});
+  };
+  playNote();ambientTimer=setInterval(playNote,850);
+ }catch(e){stopAmbientMusic();}
+}
+
+function applyMotionPreference(){document.body.classList.toggle('motion-off',saved.animations===false||!!saved.proOptions?.reducedMotion);}
+function syncSettingsModal(){
+ $('settingSound').checked=soundOn;
+ $('settingMusic').checked=!!saved.musicOn;
+ $('settingHaptics').checked=!!saved.proOptions?.haptics;
+ $('settingAnimations').checked=saved.animations!==false;
+ $('settingReducedMotion').checked=!!saved.proOptions?.reducedMotion;
+ $('settingLargeControls').checked=!!saved.proOptions?.largeControls;
+ $('settingTheme').value=saved.theme||'light';
+}
+function openSettings(){syncSettingsModal();$('settingsOverlay').classList.add('open');$('closeSettings').focus();}
+function closeSettings(){$('settingsOverlay').classList.remove('open');$('settingsBtn').focus();}
+function celebrate(){
+ if(saved.animations===false||saved.proOptions?.reducedMotion||(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches))return;
+ const colors=['#0879ee','#20b9ef','#ffc928','#19b98a','#8b5cf6','#ff8b48'];
+ for(let i=0;i<54;i++){
+  const piece=document.createElement('span');piece.className='confetti-piece';
+  piece.style.setProperty('--left',`${Math.random()*100}vw`);
+  piece.style.setProperty('--piece-width',`${5+Math.random()*5}px`);
+  piece.style.setProperty('--piece-height',`${7+Math.random()*8}px`);
+  piece.style.setProperty('--drift',`${Math.round((Math.random()-.5)*180)}px`);
+  piece.style.setProperty('--spin',`${Math.round(360+Math.random()*1080)}deg`);
+  piece.style.setProperty('--duration',`${1.25+Math.random()*.8}s`);
+  piece.style.setProperty('--delay',`${Math.random()*.28}s`);
+  piece.style.background=colors[i%colors.length];document.body.appendChild(piece);
+  piece.addEventListener('animationend',()=>piece.remove(),{once:true});
+ }
+}
+$('settingsBtn').addEventListener('click',openSettings);
+$('closeSettings').addEventListener('click',closeSettings);
+$('settingsDone').addEventListener('click',closeSettings);
+$('settingsOverlay').addEventListener('click',e=>{if(e.target===$('settingsOverlay'))closeSettings();});
+$('settingSound').addEventListener('change',e=>{soundOn=e.target.checked;saved.sound=soundOn;persist();$('soundBtn').textContent=soundOn?'🔊 Sound On':'🔇 Sound Off';if(soundOn)playTone(560,.05);});
+$('settingMusic').addEventListener('change',e=>{
+ saved.musicOn=e.target.checked;persist();
+ if(saved.musicOn)startAmbientMusic();else stopAmbientMusic();
+ msg(saved.musicOn?'Background music enabled.':'Background music disabled.','good');
+});
+$('settingHaptics').addEventListener('change',e=>{setProOption('haptics',e.target.checked);syncSettingsModal();});
+$('settingAnimations').addEventListener('change',e=>{saved.animations=e.target.checked;persist();applyMotionPreference();});
+$('settingReducedMotion').addEventListener('change',e=>{setProOption('reducedMotion',e.target.checked);applyMotionPreference();syncSettingsModal();});
+$('settingLargeControls').addEventListener('change',e=>{setProOption('largeControls',e.target.checked);syncSettingsModal();});
+$('settingTheme').addEventListener('change',e=>{$('skin').value=e.target.value;$('skin').dispatchEvent(new Event('change',{bubbles:true}));});
+$('settingsResetMotion').addEventListener('click',()=>{saved.animations=true;setProOption('reducedMotion',false);applyMotionPreference();syncSettingsModal();persist();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('settingsOverlay').classList.contains('open'))closeSettings();});
+window.addEventListener('pagehide',stopAmbientMusic);
+soundOn=saved.sound!==false;applyProOptions();applyMotionPreference();syncSettingsModal();$('skin').value=saved.theme||'neon';applyTheme(saved.theme||'neon');if(saved.musicOn)startAmbientMusic();
+
  if(!restoreActiveGame())resetGame();
 })();
 </script>

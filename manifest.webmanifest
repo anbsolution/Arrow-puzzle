@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Arrow Puzzle ULTRA v17 — Ultra Pro Edition",
-  "short_name": "Arrow Puzzle v17",
-  "description": "Mobile-first arrow puzzle with saved Pro controls, high contrast, reduced motion, haptic feedback and Android app build support.",
+  "name": "Arrow Puzzle ULTRA Pro MAX v18.1",
+  "short_name": "Arrow Puzzle MAX",
+  "description": "Mobile-first arrow puzzle with offline progress, animated UI and separate music and effects controls.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

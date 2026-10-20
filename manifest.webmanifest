@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Arrow Puzzle PRO ULTRA v10 \u2014 100 Levels",
-  "short_name": "Arrow Puzzle PRO",
-  "description": "A mobile-first arrow-clearing puzzle with 100 levels, bosses and daily challenges.",
+  "name": "Arrow Puzzle ULTRA v12",
+  "short_name": "Arrow Puzzle",
+  "description": "Mobile-first arrow puzzle with pause, auto-pause, daily missions and rewards.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

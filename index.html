@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#0c1422">
-<title>Arrow Puzzle ULTRA v11 — Daily Missions Edition</title>
+<title>Arrow Puzzle ULTRA v12 — Focus & Pause Edition</title>
 <style>
 :root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
@@ -74,6 +74,9 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
 /* ULTRA v11: daily missions */
 .mission-list{display:grid;gap:10px}.mission-card{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid #dceafa;border-radius:17px;background:linear-gradient(145deg,#fff,#f3f9ff);color:#15274a}.mission-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#e5f2ff;font-size:22px}.mission-title{font-size:13px;font-weight:900}.mission-sub{font-size:11px;color:#71829b;margin-top:3px}.mission-progress{height:6px;background:#dce9f8;border-radius:99px;overflow:hidden;margin-top:8px}.mission-progress span{display:block;height:100%;background:linear-gradient(90deg,#0879ee,#21c3d9);border-radius:99px;transition:width .25s}.mission-side{text-align:center;min-width:65px}.mission-reward{font-size:11px;font-weight:900;color:#a36a00;margin-bottom:5px}.mission-side .btn{font-size:10px;padding:7px 8px;white-space:nowrap}.mission-card.claimed{background:linear-gradient(145deg,#e9fbf2,#fff);border-color:#bcebd5}.mission-card.claimed .mission-icon{background:#d8f8e8}
 
+.pause-status{display:inline-flex;align-items:center;gap:5px;color:#1769bd;background:#eaf4ff;border:1px solid #d7e9fb;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900}
+#pauseOverlay{z-index:120}
+@media(prefers-reduced-motion:reduce){.spin-orb.spinning{animation:none}}
 </style>
 </head>
 <body>
@@ -95,7 +98,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   <div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div>
   <div id="message" class="message" aria-live="polite">Choose a level and start clearing arrows.</div>
   <div class="actions">
-   <button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button>
+   <button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="pauseBtn" aria-label="Pause game">Ⅱ Pause</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button>
   </div>
   <div class="sectionhead" style="margin-top:15px"><h2>Power-ups</h2><span class="muted">Limited use per board</span></div>
   <div class="actions">
@@ -126,7 +129,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  <div class="sectionhead" style="margin-top:15px"><h2>Save Backup</h2><span class="muted">Move progress between browsers</span></div>
   <div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div>
   <input id="importFile" type="file" accept="application/json,.json" hidden>
-  <p class="info">💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
+  <p class="info">⏸ Pause button ya P key se timer rok sakte hain. App/tab chhodne par game auto-pause hota hai. 💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
  </section>
  <div class="sectionhead"><h2>Daily Rewards</h2><span class="muted">Claim once per day</span></div>
  <section class="panel" style="padding:12px">
@@ -174,6 +177,12 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   <p>Progress is saved automatically on this device.</p>
  </section>
 </div>
+<div class="overlay" id="pauseOverlay" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+ <section class="overlay-card"><div class="overlay-emoji">⏸️</div><h2 id="pauseTitle">Game Paused</h2><p>Your timer is stopped. Take a breath, then continue when ready.</p>
+  <div class="overlay-stats"><div class="overlay-stat"><strong id="pauseMoves">0</strong><small>MOVES</small></div><div class="overlay-stat"><strong id="pauseTime">00:00</strong><small>TIME</small></div><div class="overlay-stat"><strong id="pauseLeft">0</strong><small>ARROWS LEFT</small></div></div>
+  <div class="overlay-actions"><button class="btn" id="pauseRestart">↻ Restart</button><button class="btn primary" id="resumeBtn">▶ Resume</button><button class="btn wide" id="pauseHome">⌂ Home Dashboard</button></div>
+ </section>
+</div>
 <div class="overlay" id="completeOverlay" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
  <section class="overlay-card"><div class="overlay-emoji">🏆</div><h2 id="completeTitle">Level Completed!</h2><div id="completeStars" style="font-size:30px;color:#f5b800;letter-spacing:3px">★★★</div><p id="completeSubtitle">Brilliant! You cleared every arrow.</p>
   <div class="overlay-stats"><div class="overlay-stat"><strong id="completeMoves">0</strong><small>MOVES</small></div><div class="overlay-stat"><strong id="completeTime">00:00</strong><small>TIME</small></div><div class="overlay-stat"><strong id="completeCoins">+0</strong><small>COINS</small></div></div>
@@ -193,7 +202,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   light:{bg:'#e8eef6',tile:'#d8e3f0',empty:'#f7f9fc',line:'#b7c7db',accent:'#087e70',text:'#15243a'}
  };
  let level=1,diff='easy',mode='classic',size=5,cells=[],moves=0,hintIndex=-1,finished=false,history=[],soundOn=true,boardVersion=0;
- let startedAt=0,elapsedBefore=0,timerHandle=null,dailyFinished=false,power={scan:2,burst:1,shield:1},shieldReady=false,scanActive=false;
+ let startedAt=0,elapsedBefore=0,timerHandle=null,dailyFinished=false,paused=false,power={scan:2,burst:1,shield:1},shieldReady=false,scanActive=false;
  const storeKey='arrowPuzzlePro_v3';
  let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',coins:0,claimedDay:'',challengeClaims:[],unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
  try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(x&&typeof x==='object')saved={...saved,...x,levels:x.levels||{},daily:x.daily||{},stats:x.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:x.achievements||{},unlockedSkins:x.unlockedSkins||['classic'],coins:x.coins||0,claimedDay:x.claimedDay||'',challengeClaims:x.challengeClaims||[],arrowSkin:x.arrowSkin||'classic'};}catch(e){}
@@ -247,7 +256,9 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null;}}
  function getTime(){return elapsedBefore+(startedAt?Math.floor((Date.now()-startedAt)/1000):0);}
  function fmt(s){s=Math.max(0,s|0);return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
- function startTimer(){stopTimer();startedAt=Date.now();timerHandle=setInterval(()=>{$('timer').textContent=fmt(getTime());},500);}
+ function startTimer(){stopTimer();if(paused||finished)return;startedAt=Date.now();timerHandle=setInterval(()=>{$('timer').textContent=fmt(getTime());},500);}
+ function pauseGame(auto=false){if(finished||paused)return;elapsedBefore=getTime();startedAt=0;stopTimer();paused=true;$('pauseMoves').textContent=String(moves);$('pauseTime').textContent=fmt(elapsedBefore);$('pauseLeft').textContent=String(cells.filter(c=>!c.gone).length);$('pauseOverlay').classList.add('open');$('pauseBtn').textContent='▶ Resume';$('pauseBtn').setAttribute('aria-label','Resume game');if(!auto)msg('Game paused. Timer stopped.','good');}
+ function resumeGame(){if(!paused)return;paused=false;$('pauseOverlay').classList.remove('open');$('pauseBtn').textContent='Ⅱ Pause';$('pauseBtn').setAttribute('aria-label','Pause game');startTimer();msg('Back in the game. Good luck!','good');}
  function starsFor(t,m){const fast=Math.max(20,cells.length*3),steady=Math.max(45,cells.length*6);if(t<=fast)return 3;if(t<=steady)return 2;return 1;}
  function applyTheme(name){
   const t=themes[name]||themes.neon;const r=document.documentElement;
@@ -348,7 +359,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  function openHome(){renderHome();$('homeOverlay').classList.add('open');}
  function closeHome(){$('homeOverlay').classList.remove('open');}
  function resetGame(){
-  stopTimer();moves=0;hintIndex=-1;finished=false;history=[];elapsedBefore=0;startedAt=0;
+  stopTimer();moves=0;hintIndex=-1;finished=false;paused=false;$('pauseOverlay').classList.remove('open');$('pauseBtn').textContent='Ⅱ Pause';$('pauseBtn').setAttribute('aria-label','Pause game');history=[];elapsedBefore=0;startedAt=0;
   if(mode==='daily'&&saved.daily[id()]?.complete){dailyFinished=true;msg('Aaj ka Daily Challenge complete ho chuka hai. Replay karke apna score improve karo.');}
   else {dailyFinished=false;msg(mode==='daily'?`Daily Challenge · ${diff} · ${today()}`:`Level ${level} · ${diff[0].toUpperCase()+diff.slice(1)}${level%10===0?' · BOSS FIGHT':''}`);}
   makeBoard();startTimer();render();
@@ -358,7 +369,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.value=.04;osc.connect(gain);gain.connect(ctx.destination);osc.start();gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.stop(ctx.currentTime+duration);osc.onended=()=>ctx.close();}catch(e){}
  }
  function tap(i){
-  const c=cells[i];if(!c||c.gone||finished)return;
+  const c=cells[i];if(!c||c.gone||finished||paused)return;
   if(!clearRay(c)){if(shieldReady){shieldReady=false;msg('🛡 Shield ne blocked move ko protect kiya.','good');playTone(360,.08);}else{msg('Raasta blocked hai. Pehle saamne wala arrow hatao.','warn');playTone(180,.08);}return;}
   history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});
   c.gone=true;moves++;ensureMissions().moves++;hintIndex=-1;scanActive=false;playTone(680,.045);
@@ -367,7 +378,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   render();
  }
  function completeGame(){
-  finished=true;stopTimer();ensureMissions().clears++;persist();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
+  finished=true;paused=false;$('pauseOverlay').classList.remove('open');stopTimer();ensureMissions().clears++;persist();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
   const entry={complete:true,stars:Math.max(stars,old?.stars||0),bestMoves:Math.min(moves,old?.bestMoves??Infinity),bestTime:Math.min(t,old?.bestTime??Infinity),lastTime:t};
   if(mode==='daily')saved.daily[k]=entry;else saved.levels[k]=entry;
   const firstClear=!old?.complete;
@@ -427,9 +438,9 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  });
  $('resetSaveBtn').addEventListener('click',()=>{if(!confirm('Kya aap sure hain? Saare levels, coins aur achievements reset ho jayenge.'))return;localStorage.removeItem(storeKey);location.reload();});
  $('homeBtn').addEventListener('click',openHome);
- $('homeClose').addEventListener('click',closeHome);
+ $('homeClose').addEventListener('click',()=>{closeHome();if(paused)resumeGame();});
  $('homeOverlay').addEventListener('click',e=>{if(e.target===$('homeOverlay'))closeHome();});
- $('homePlay').addEventListener('click',closeHome);
+ $('homePlay').addEventListener('click',()=>{closeHome();if(paused)resumeGame();});
  $('homeDaily').addEventListener('click',()=>{closeHome();mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});});
  $('homeLevels').addEventListener('click',()=>{closeHome();$('levels').scrollIntoView({behavior:'smooth',block:'start'});});
  $('homeChallenges').addEventListener('click',()=>{closeHome();$('challengeList').scrollIntoView({behavior:'smooth',block:'center'});});
@@ -475,6 +486,12 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   if(!history.length||finished){msg('Undo ke liye koi pichhla move nahi hai.','warn');return;}
   const prev=history.pop();cells=prev.cells;moves=prev.moves;hintIndex=-1;render();msg('Pichhla move undo ho gaya.','good');playTone(420,.05);
  });
+ $('pauseBtn').addEventListener('click',()=>paused?resumeGame():pauseGame(false));
+ $('resumeBtn').addEventListener('click',resumeGame);
+ $('pauseRestart').addEventListener('click',()=>{resetGame();});
+ $('pauseHome').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');openHome();});
+ $('pauseOverlay').addEventListener('click',e=>{if(e.target===$('pauseOverlay'))resumeGame();});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!finished&&!paused)pauseGame(true);}else if(paused){$('pauseOverlay').classList.add('open');}});
  $('restartBtn').addEventListener('click',resetGame);
  $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
@@ -485,6 +502,9 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  });
  document.addEventListener('keydown',e=>{
   if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;
+  if(e.key==='Escape'&&paused){resumeGame();return;}
+  if(paused)return;
+  if(e.key.toLowerCase()==='p'){$('pauseBtn').click();return;}
   if(e.key.toLowerCase()==='h')$('hintBtn').click();
   if(e.key.toLowerCase()==='u')$('undoBtn').click();
   if(e.key.toLowerCase()==='r')$('restartBtn').click();

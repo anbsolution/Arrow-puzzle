@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Arrow Puzzle ULTRA v12",
+  "name": "Arrow Puzzle ULTRA v13",
   "short_name": "Arrow Puzzle",
-  "description": "Mobile-first arrow puzzle with pause, auto-pause, daily missions and rewards.",
+  "description": "Mobile-first arrow puzzle with smart coaching, ranked hints, pause, daily missions and rewards.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

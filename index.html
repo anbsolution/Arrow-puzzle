@@ -4,19 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#0c1422">
-<meta name="description" content="Arrow Puzzle PRO — 100 levels, boss stages, daily challenges and offline puzzle gameplay.">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Arrow Puzzle PRO">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<title>Arrow Puzzle PRO ULTRA v9 — Multi-Screen PWA</title>
+<title>Arrow Puzzle ULTRA v11 — Daily Missions Edition</title>
 <style>
 :root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-.install-btn{border:1px solid #2e8f79;background:#102d2b;color:#8fffe0;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:800;cursor:pointer;display:none}.install-btn.show{display:inline-flex}.pwa-status{font-size:10px;color:var(--muted);text-align:center;margin:6px 0 0}.app{max-width:780px;margin:auto;padding:15px 13px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.logo{font-size:21px;font-weight:950;letter-spacing:.5px}.logo span{color:var(--accent)}.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 9px;white-space:nowrap}
+.app{max-width:780px;margin:auto;padding:15px 13px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.logo{font-size:21px;font-weight:950;letter-spacing:.5px}.logo span{color:var(--accent)}.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 9px;white-space:nowrap}
 h1{font-size:clamp(27px,7vw,39px);line-height:1.05;letter-spacing:-.8px;margin:25px 0 8px}.sub{font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 17px}
 .panel{background:linear-gradient(145deg,#1a2a43,#132036);border:1px solid #2a405d;border-radius:21px;padding:14px;box-shadow:0 15px 40px #0003}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px 2px}.field select{width:100%;background:#0d192a;color:var(--text);border:1px solid #354d6a;border-radius:12px;padding:11px 10px;font-size:14px;min-width:0}
 .featureline{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 2px}.chip{font-size:11px;font-weight:750;border:1px solid #334a65;background:#122036;color:#bfd0e7;padding:6px 8px;border-radius:999px}.chip.boss{color:var(--gold);border-color:#866c35;background:#342d20}.chip.active{color:var(--accent);border-color:#287b6a}
@@ -28,115 +20,170 @@ h1{font-size:clamp(27px,7vw,39px);line-height:1.05;letter-spacing:-.8px;margin:2
 .menu-overlay{position:fixed;inset:0;background:#050a12d9;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}.menu-overlay.open{display:flex}.menu-card{width:min(100%,430px);background:#17263d;border:1px solid #3a526f;border-radius:22px;padding:20px;box-shadow:0 25px 70px #0009}.menu-card h2{margin:0 0 6px}.menu-card p{font-size:13px;color:var(--muted);line-height:1.5}.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.menu-grid .btn{padding:13px 8px}.coin{color:#ffd166}.skin-crystal .cell:not(.empty){text-shadow:0 0 8px #9cecff,0 0 18px #43d9ff;color:#a8f1ff}.skin-fire .cell:not(.empty){text-shadow:0 0 8px #ff7b42,0 0 16px #ff4d22;color:#ff9c62}.skin-gold .cell:not(.empty){text-shadow:0 0 8px #ffd166,0 0 16px #ffbd35;color:#ffe6a0}
 @media(min-width:570px){.app{padding-top:24px}.levels{grid-template-columns:repeat(10,1fr)}.actions{grid-template-columns:repeat(6,1fr)}}
 
-/* ULTRA v8: high-detail, responsive, GPU-friendly visual pass */
-:root{color-scheme:dark;--accent:#66ffe0;--line:#365575;--panel:#14243b}
-html{background:#070d18;scroll-behavior:smooth}
-body{isolation:isolate;overflow-x:hidden;background:radial-gradient(ellipse at 50% -15%,#315b80 0%,#14253e 32%,#080f1c 72%);background-attachment:fixed}
-body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.22;transform:translateZ(0)}
-body:before{width:48vw;height:48vw;max-width:560px;max-height:560px;min-width:220px;min-height:220px;left:-18vw;top:18vh;background:#00e6c0}
-body:after{width:44vw;height:44vw;max-width:520px;max-height:520px;min-width:200px;min-height:200px;right:-18vw;top:58vh;background:#4d6cff}
-.app{max-width:1040px;padding:clamp(13px,2.7vw,30px) clamp(12px,2.5vw,26px) 38px}
-.top{position:relative;padding:12px 14px;border:1px solid #6b91b733;border-radius:18px;background:linear-gradient(115deg,#13253bd9,#0d1929d9);box-shadow:0 10px 35px #0003,inset 0 1px #ffffff14;backdrop-filter:blur(18px)}
-.logo{font-size:clamp(17px,2.4vw,25px);letter-spacing:.8px;text-shadow:0 0 22px #66ffe033}
-.logo span{background:linear-gradient(90deg,#6affd8,#7ad9ff 55%,#b5a5ff);color:transparent;background-clip:text;-webkit-background-clip:text}
-.tag{background:#0b1727b8;border-color:#6d93b44d;box-shadow:inset 0 1px #ffffff0c}
-h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,4vw,42px);text-shadow:0 6px 30px #0006}
-.sub{max-width:760px;font-size:clamp(13px,1.6vw,16px);color:#c0cee2}
-.panel{position:relative;overflow:hidden;background:linear-gradient(145deg,#1a2d48ed,#101c30f2 70%);border:1px solid #7395ba3d;border-radius:clamp(18px,2.7vw,28px);padding:clamp(12px,2vw,22px);box-shadow:0 22px 65px #0005,inset 0 1px #ffffff18;backdrop-filter:blur(18px)}
-.panel:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#a9fff0a6,#94b9ff77,transparent);pointer-events:none}
-.field select,.toggle select{box-shadow:inset 0 1px 4px #0004;transition:border-color .2s,box-shadow .2s}
-.field select:focus,.toggle select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px #66ffe01e}
-.chip{box-shadow:inset 0 1px #ffffff0b;letter-spacing:.2px}
-.stats{gap:clamp(6px,1vw,10px)}
-.stat{position:relative;overflow:hidden;background:linear-gradient(145deg,#0c192b,#13243a);border-color:#7394b52e;box-shadow:inset 0 1px #ffffff0c,0 5px 16px #0002;padding:clamp(9px,1.4vw,14px) 3px}
-.stat:before{content:"";position:absolute;inset:0 15% auto;height:1px;background:linear-gradient(90deg,transparent,#8fffff8a,transparent)}
-.stat strong{font-size:clamp(18px,3vw,27px);text-shadow:0 0 20px #66ffe025}
-.board-wrap{padding:clamp(7px,1.5vw,16px) 0 18px}
-.board{width:min(100%,620px);gap:clamp(3px,.65vw,6px);padding:clamp(6px,1vw,10px);border-radius:clamp(15px,2.4vw,24px);border-color:#8bb8df54;background:linear-gradient(145deg,#081321,#0a1728);box-shadow:0 20px 50px #0006,inset 0 1px #c9f4ff1b,inset 0 -10px 30px #0003;position:relative}
-.board:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,#9ceaff0a,transparent 35%,#8b9bff08 75%,transparent);}
-.cell{border-radius:clamp(6px,1vw,11px);font-size:clamp(17px,3.8vw,35px);background:linear-gradient(145deg,#294564,#192d47);border-color:#82b1d22b;box-shadow:inset 0 1px #ffffff20,inset 0 -3px 7px #07101d5c,0 3px 0 #050b14,0 5px 10px #0002;text-shadow:0 1px 0 #fff2;transition:transform .18s cubic-bezier(.2,.8,.2,1),background .2s,opacity .15s,box-shadow .2s,border-color .2s}
-.cell:not(.empty):hover{border-color:#8cffe8a6;box-shadow:inset 0 1px #ffffff2b,0 0 0 1px #66ffe02b,0 0 20px #66ffe019,0 4px 0 #050b14;z-index:2}
-.cell.empty{background:linear-gradient(145deg,#0b1727,#0e1b2c);border-color:#31445a42}
-.cell.hint{outline:2px solid #ffdc72;box-shadow:0 0 0 4px #ffdc7221,0 0 28px #ffd16680,inset 0 1px #fff7}
-.cell.blocked{border-color:#ff727266;box-shadow:0 0 18px #ff72721f,inset 0 1px #ffffff15}
-.btn{position:relative;overflow:hidden;background:linear-gradient(145deg,#2a4260,#1b2e48);border-color:#7c9bbc40;box-shadow:inset 0 1px #ffffff14,0 4px 12px #0002;transition:transform .15s,filter .15s,box-shadow .15s}
-.btn:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 15%,#ffffff0c 48%,transparent 75%);transform:translateX(-120%);transition:transform .45s}
-.btn:hover:before{transform:translateX(120%)}.btn:hover{filter:brightness(1.12);box-shadow:inset 0 1px #ffffff22,0 7px 18px #0003}.btn:active{transform:translateY(1px) scale(.985)}
-.btn.primary{background:linear-gradient(120deg,#65f5c8,#8affed);box-shadow:0 5px 22px #66ffe02a,inset 0 1px #ffffffa8}
-.btn.gold{background:linear-gradient(145deg,#554421,#332a1b);border-color:#b9954b70}
-.progressbar{height:9px;background:#091626;border:1px solid #7693b22b;padding:1px}.progressfill{border-radius:99px;background:linear-gradient(90deg,#35d8a6,#7dffe0,#9ddaff);box-shadow:0 0 15px #66ffe055}
-.lv{background:linear-gradient(145deg,#1e3552,#15263e);box-shadow:inset 0 1px #ffffff0d,0 3px 8px #0002;transition:transform .15s,border-color .15s,filter .15s}.lv:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.13)}.lv.current{box-shadow:0 0 20px #66ffe03b,inset 0 1px #ffffff80}
-.menu-overlay{background:#030813e8;backdrop-filter:blur(16px)}.menu-card{background:linear-gradient(145deg,#1b304c,#101c30);border-color:#8ab1d34d;box-shadow:0 28px 90px #000a,inset 0 1px #ffffff18}
-.install-btn{box-shadow:0 0 20px #66ffe018,inset 0 1px #ffffff12}
-.footer{padding-top:15px;border-top:1px solid #9db9d01a}
-@media(min-width:760px){.app{max-width:1100px}.panel{padding:24px}.board-wrap{padding-top:18px}.board{width:min(100%,660px)}.controls{grid-template-columns:1fr 1fr}.actions{gap:10px}.btn{padding:13px 10px}}
-@media(max-width:390px){.logo{font-size:16px}.tag{font-size:9px;padding:6px}.top{padding:10px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat small{font-size:9px}.actions{gap:6px}.btn{font-size:12px;padding:10px 4px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+/* ULTRA v7: bright, polished, reference-inspired mobile UI */
+.challenge-list{display:grid;gap:10px}.challenge-card{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border-radius:18px;background:linear-gradient(120deg,#f5faff,#eaf5ff);border:1px solid #d7e8f8}.challenge-trophy{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:#fff5cb;font-size:25px}.challenge-name{font-size:13px;font-weight:900;color:#16274a}.challenge-reward{font-size:11px;color:#987000;font-weight:800;margin-top:3px}.challenge-progress{height:6px;border-radius:99px;background:#d5e5f6;overflow:hidden;margin:8px 0 5px}.challenge-progress span{display:block;height:100%;background:linear-gradient(90deg,#0879ee,#20b7e8);border-radius:99px}.challenge-count{font-size:10px;color:#72839d}.challenge-side{text-align:center;min-width:55px;color:#1264bc;font-weight:900}.challenge-side small{display:block;font-size:10px;color:#7b8ba4;font-weight:700}.challenge-claim{margin-top:6px;padding:6px 8px!important;font-size:10px!important;border-radius:9px!important}
+
+:root{--bg:#edf6ff;--panel:#ffffff;--panel2:#f5faff;--text:#101d3b;--muted:#63738e;--accent:#0879ee;--gold:#ffc928;--danger:#ff5b6e;--tile:#ffffff;--empty:#ffffff;--line:#d7e4f3}
+body{background:radial-gradient(ellipse at 50% -10%,#cce8ff 0,#edf7ff 42%,#f8fbff 100%)!important;color:#101d3b!important}
+.app{max-width:620px;padding:18px 14px 36px}
+.top{padding:10px 12px;background:#ffffffd9;border:1px solid #e1edfa;border-radius:18px;box-shadow:0 8px 24px #215b9710;backdrop-filter:blur(12px)}
+.logo{color:#102247;font-size:17px;letter-spacing:-.4px}.logo span,.title-blue{color:#0879ee!important}
+.tag{background:#eaf4ff;border:1px solid #d6e9ff;color:#1766b4;font-weight:800}
+h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-spacing:-1.6px;color:#101d3b;font-weight:950}
+.sub{margin:0 4px 18px;color:#6c7b94;font-size:14px}
+.panel{background:linear-gradient(155deg,#fff,#fafdff)!important;border:1px solid #dceafa!important;border-radius:26px!important;padding:14px!important;box-shadow:0 16px 42px #285b8b12!important}
+.field label{color:#657894;font-weight:850;letter-spacing:.6px}.field select{background:#f4f9ff!important;color:#172747!important;border:1px solid #d9e7f7!important;border-radius:14px!important;padding:13px 12px!important;font-weight:750}
+.chip{background:#eef6ff!important;border:1px solid #dbeafa!important;color:#38618e!important}.chip.active{background:#e1f8ed!important;color:#14805a!important;border-color:#bcebd5!important}.chip.boss{background:#fff6d8!important;color:#956500!important;border-color:#ffe39a!important}
+.stats{gap:8px;margin:14px 0}.stat{background:#f4f9ff!important;border:1px solid #e0ecf8!important;border-radius:16px!important;padding:11px 3px!important;color:#15274a}.stat strong{font-size:clamp(19px,5vw,25px);color:#10254b}.stat small{color:#7b8ba4;font-weight:800;letter-spacing:.3px}
+.board-wrap{padding:9px 0 13px}.board{width:min(100%,520px)!important;aspect-ratio:1!important;gap:0!important;padding:8px!important;background:#fff!important;border:2px solid #e4edf7!important;border-radius:24px!important;box-shadow:0 12px 28px #174e8310!important;touch-action:manipulation}
+.cell{background:transparent!important;border:0!important;border-radius:5px!important;box-shadow:none!important;color:#111f4b!important;font-size:clamp(22px,6vw,38px)!important;font-weight:950!important;text-shadow:none!important;transition:transform .18s,opacity .18s,color .18s!important}
+.cell.empty{background:transparent!important;border:0!important;opacity:1!important;cursor:default!important}
+.cell.empty::after{content:"";width:clamp(5px,1.5vw,9px);height:clamp(5px,1.5vw,9px);border-radius:50%;background:#cbd3dc;display:block}
+.cell.hint{outline:0!important;background:#e5f4ff!important;color:#0879ee!important;border-radius:12px!important;box-shadow:0 0 0 3px #68baff,0 0 0 8px #d9efff!important;z-index:2}
+.cell.hint.empty::after{background:#0879ee}
+.cell:active{transform:scale(.88)!important}
+@keyframes popout{0%{transform:scale(1);opacity:1}45%{transform:scale(1.2);opacity:.9}100%{transform:scale(.15);opacity:0}}
+.message{min-height:28px;padding:7px 10px;border-radius:12px;color:#657894;font-weight:650}.message.good{background:#e8fbf2;color:#16835b}.message.warn{background:#fff6de;color:#9c6b00}
+.actions{gap:8px}.btn{border:1px solid #d9e7f7!important;border-radius:15px!important;padding:12px 8px!important;background:#f1f7ff!important;color:#20456f!important;font-weight:850!important;box-shadow:0 4px 10px #23598b0a;transition:transform .12s,box-shadow .12s}.btn:active{transform:scale(.97)}.btn.primary{background:linear-gradient(115deg,#0878f9,#08a6e9)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 18px #0879ee30!important}.btn.gold{background:#fff6d9!important;color:#946500!important;border-color:#ffe39a!important}
+.options{gap:8px}.toggle{background:#f5f9ff!important;border:1px solid #e1ebf7!important;border-radius:14px!important}.toggle label{color:#6b7d98!important;font-weight:800}.toggle select{background:#fff!important;color:#173054!important;border-color:#d9e7f7!important}
+.sectionhead{margin:24px 3px 10px}.sectionhead h2{color:#15274a;font-size:19px;font-weight:900}.muted{color:#7b8ba4!important}
+.progressbar{height:9px;background:#dceafa!important;border-radius:999px}.progressfill{background:linear-gradient(90deg,#0879ee,#28c5ef)!important}
+.levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.lv{background:#eef6ff!important;border:1px solid #d8e8fa!important;color:#1759a3!important;border-radius:13px!important;padding:12px 0!important;box-shadow:0 3px 8px #245d9010}.lv.done{background:#e5f9ee!important;color:#118258!important;border-color:#bdebd4!important}.lv.current{background:linear-gradient(140deg,#0879ee,#12a6eb)!important;color:white!important;border-color:transparent!important;box-shadow:0 7px 14px #0879ee30!important}.lv:disabled{background:#f0f3f8!important;color:#a4afbf!important;opacity:.8}.lv small{font-size:8px}
+.menu-overlay{background:#10244bc9!important;backdrop-filter:blur(14px)!important}.menu-card{background:#fff!important;color:#132446!important;border:1px solid #dbe9f8!important;border-radius:26px!important;box-shadow:0 24px 80px #001b4380!important}.menu-card p{color:#6c7b94!important}
+.footer{color:#93a2b8!important}
+.skin-crystal .cell:not(.empty){color:#0b9bd9!important;text-shadow:0 0 10px #85e5ff!important}.skin-fire .cell:not(.empty){color:#f46b35!important;text-shadow:0 0 10px #ffc18d!important}.skin-gold .cell:not(.empty){color:#d69b00!important;text-shadow:0 0 10px #ffe59a!important}
+@media(min-width:570px){.levels{grid-template-columns:repeat(10,minmax(0,1fr))}.app{padding-top:24px}}
+@media(max-width:380px){.actions{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.levels{grid-template-columns:repeat(4,minmax(0,1fr))}.logo{font-size:15px}.tag{font-size:9px}}
+/* ULTRA v8 app-shell and celebration overlays */
+.top-right{display:flex;align-items:center;gap:8px}.icon-btn{width:40px;height:40px;border:1px solid #d7e8fa;border-radius:13px;background:#fff;color:#0879ee;font-size:20px;font-weight:900;box-shadow:0 5px 15px #245d9012;cursor:pointer}
+.overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;background:#10244bc9;backdrop-filter:blur(14px)}.overlay.open{display:flex}.overlay-card{width:min(100%,420px);max-height:90dvh;overflow:auto;border:1px solid #dbe9f8;border-radius:28px;background:linear-gradient(155deg,#fff,#f0f8ff);padding:22px;box-shadow:0 25px 80px #001b4380;color:#132446;text-align:center}.overlay-card h2{font-size:28px;line-height:1.1;margin:7px 0}.overlay-card p{font-size:13px;color:#687b97;line-height:1.5}.overlay-emoji{font-size:48px;filter:drop-shadow(0 7px 10px #ffc92855)}.overlay-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.overlay-stat{background:#eaf4ff;border:1px solid #dceafa;border-radius:15px;padding:10px 4px}.overlay-stat strong{display:block;font-size:19px;color:#0b63c8}.overlay-stat small{font-size:10px;color:#72839d;font-weight:800}.overlay-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.overlay-actions .wide{grid-column:1/-1}.menu-grid{grid-template-columns:1fr 1fr}.menu-card{max-height:90dvh;overflow:auto}.menu-card h2{color:#132446}.menu-card .btn{background:#f1f7ff!important;color:#20456f!important}.menu-card .btn.primary{background:linear-gradient(115deg,#0878f9,#08a6e9)!important;color:#fff!important}
+
+/* ULTRA v9 — dashboard, streak calendar, and celebration polish */
+.top-right{display:flex;align-items:center;gap:7px}.icon-btn{width:38px;height:38px;border:1px solid #d6e8fb;border-radius:13px;background:#f2f8ff;color:#0879ee;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 5px 12px #145da00c}
+#homeOverlay{position:fixed;inset:0;background:#e9f4ffed;z-index:70;display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(12px)}#homeOverlay.open{display:flex}.home-card{width:min(100%,440px);max-height:min(92dvh,900px);overflow:auto;background:linear-gradient(160deg,#fff,#f0f8ff)!important;border:1px solid #d8eafb!important;border-radius:28px!important;padding:16px!important;box-shadow:0 25px 70px #1a5c972b!important;color:#102247}.home-hero{text-align:center;padding:10px 4px 16px}.home-mark{margin:0 auto 8px;width:54px;height:54px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#0879ee,#20b9ef);color:white;font-size:34px;font-weight:950;box-shadow:0 9px 20px #0879ee33}.home-kicker{font-size:10px;letter-spacing:2px;font-weight:950;color:#4f7ba9}.home-hero h2{margin:5px 0;font-size:27px;letter-spacing:-1px}.home-hero h2 span{color:#0879ee}.home-hero p{margin:0;color:#6c7b94;font-size:13px}.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}.home-stats>div{background:#eaf5ff;border:1px solid #d7e9fb;border-radius:16px;padding:11px 4px;text-align:center}.home-stats strong{display:block;font-size:22px;color:#1266c0}.home-stats small{font-size:9px;font-weight:900;color:#7184a1}.home-section-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px;color:#17294d;font-size:13px}.home-section-title span{font-size:9px;letter-spacing:1px;color:#0879ee;font-weight:900}.daily-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:13px}.day-dot{min-width:0;text-align:center;padding:8px 1px;border-radius:12px;background:#f1f7ff;border:1px solid #dceafb;color:#7c8da7}.day-dot strong{display:block;font-size:10px}.day-dot span{display:block;font-size:16px;margin:3px 0}.day-dot small{display:block;font-size:8px;font-weight:800}.day-dot.done{background:#e2f9ee;border-color:#b9edd4;color:#14865c}.day-dot.today{outline:2px solid #1685f5;outline-offset:1px}.home-play{width:100%;padding:14px!important;margin-bottom:9px;font-size:15px!important;border-radius:15px!important;background:linear-gradient(100deg,#0879ee,#14b8e8)!important;color:white!important;border:0!important;box-shadow:0 9px 20px #0879ee29}.home-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.home-actions .btn{background:#fff;color:#19345b;border-color:#dceafa;padding:12px 6px}.home-note{text-align:center;color:#7b8ca5;font-size:10px;line-height:1.5;margin:13px 4px 9px}.home-close{width:100%;background:#edf5ff;color:#1769bd;border-color:#d5e8fb}.overlay-card{animation:overlayIn .22s ease-out}@keyframes overlayIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+#completeOverlay.open .overlay-card{box-shadow:0 24px 75px #0879ee30}
+@media(max-height:690px){.home-card{padding:10px!important}.home-hero{padding:3px 4px 9px}.home-mark{width:42px;height:42px;font-size:27px}.home-stats{margin-bottom:9px}.home-note{margin:8px 4px}}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ULTRA v10 — reward arcade, shop cards, and extra mobile polish */
+.reward-arcade{display:grid;grid-template-columns:1fr;gap:12px}.spin-card{position:relative;overflow:hidden;text-align:center;background:radial-gradient(circle at 50% 0,#e2f4ff,#fff 62%)!important}.spin-orb{width:116px;height:116px;margin:12px auto 10px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#0879ee 0 60deg,#ffcf35 60deg 120deg,#19b98a 120deg 180deg,#8b5cf6 180deg 240deg,#ff8b48 240deg 300deg,#0879ee 300deg);box-shadow:0 9px 24px #0879ee25;position:relative}.spin-orb:before{content:"";position:absolute;inset:9px;border-radius:50%;background:#fff;border:3px solid #e0efff}.spin-orb span{z-index:1;font-size:39px;filter:drop-shadow(0 4px 4px #ffc92855)}.spin-orb.spinning{animation:wheelSpin 1.15s cubic-bezier(.15,.72,.18,1)}@keyframes wheelSpin{to{transform:rotate(1080deg)}}.spin-caption{font-size:12px;color:#6c7b94;line-height:1.5;margin:0 0 12px}.shop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.shop-item{padding:13px 10px;border:1px solid #dceafa;border-radius:17px;background:linear-gradient(145deg,#fff,#f1f8ff);text-align:center}.shop-icon{font-size:28px;margin-bottom:4px}.shop-item strong{display:block;font-size:13px;color:#17294d}.shop-item small{display:block;color:#7b8ba4;font-size:10px;margin:4px 0 9px}.shop-item .btn{width:100%;padding:9px 6px!important;font-size:11px!important}.shop-item.owned{background:linear-gradient(145deg,#e8fbf2,#fff);border-color:#bcebd5}.section-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e6f3ff;color:#1769bd;font-size:10px;font-weight:950;letter-spacing:.7px;margin-bottom:8px}.v10-note{font-size:11px;color:#7b8ba4;text-align:center;line-height:1.5;margin:10px 4px 0}
+@media(min-width:520px){.reward-arcade{grid-template-columns:.85fr 1.15fr}.spin-card{display:flex;flex-direction:column;justify-content:center}.shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
 
-/* v9: real multi-screen mobile game UI */
-.screen{display:none;animation:screenIn .22s ease-out}.screen.active{display:block}@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.nav-icon{width:38px;height:38px;border-radius:12px;border:1px solid #6b91b744;background:#102036;color:#eff8ff;font-size:22px;font-weight:900;display:grid;place-items:center;flex-shrink:0}.top .logo{flex:1}.top{gap:8px}.app{padding-bottom:100px}.hero{padding:24px 2px 8px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--accent);margin-bottom:10px}.hero h1,.page-heading h1,.game-head h1{margin:0 0 12px;font-size:clamp(38px,10vw,62px);line-height:.98;letter-spacing:-2px}.hero h1 span{color:var(--accent);text-shadow:0 0 28px #66ffe033}.hero .sub{font-size:14px;max-width:560px}.hero-art{width:min(100%,330px);aspect-ratio:1.45;margin:18px auto 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;transform:perspective(600px) rotateX(9deg);padding:10px;border-radius:22px;background:linear-gradient(145deg,#172b44,#0b1525);border:1px solid #7ba7cf2c;box-shadow:0 24px 50px #0005}.art-tile{display:grid;place-items:center;border-radius:13px;border:1px solid #6c94b64a;background:linear-gradient(145deg,#203c59,#0d1a2c);font-size:clamp(24px,7vw,36px);font-weight:950;color:#8aa9c8;box-shadow:inset 0 1px #fff2,0 5px 0 #050b13;transform:translateY(-2px)}.art-tile.glow{color:var(--accent);border-color:#66ffe0aa;text-shadow:0 0 14px #66ffe0;box-shadow:inset 0 1px #fff4,0 5px 0 #063a36,0 0 25px #66ffe027}.big-btn{font-size:16px;letter-spacing:1px;padding:17px 12px;border-radius:15px}.wide-btn{width:100%;margin-top:9px;padding:14px}.home-mini-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:18px 0 8px;padding:14px 4px;border-top:1px solid #8caac21f;border-bottom:1px solid #8caac21f}.home-mini-stats div{text-align:center}.home-mini-stats strong{display:block;font-size:24px}.home-mini-stats small{font-size:9px;letter-spacing:1px;color:var(--muted)}.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0 8px}.home-card{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;padding:17px 14px;border-radius:17px;border:1px solid #7699bd36;background:linear-gradient(145deg,#192b43,#101c2e);color:var(--text);min-height:118px}.home-card span{font-size:24px;color:var(--accent);margin-bottom:5px}.home-card strong{font-size:14px}.home-card small{font-size:11px;color:var(--muted)}.page-heading{padding:24px 2px 14px}.page-heading h1{font-size:clamp(34px,9vw,48px)}.page-heading .sub{margin-bottom:0}.level-progress-row{margin:10px 2px}.levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.lv{aspect-ratio:1;padding:3px;font-size:14px;border-radius:13px;background:linear-gradient(145deg,#203751,#101d30);box-shadow:inset 0 1px #fff1,0 3px 0 #050a12}.lv.current{box-shadow:0 0 18px #66ffe033,0 3px 0 #0d6c5a}.lv small{font-size:8px}.game-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 2px 10px}.game-head h1{font-size:clamp(29px,7vw,42px);margin:0}.pause-btn{min-width:84px}.game-meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}.game-meta .chip{font-size:9px;padding:6px 8px}.game-panel{padding:clamp(9px,2vw,16px)}.board-wrap{padding:3px 0 8px}.board{width:min(100%, min(82vw,500px));gap:3px;padding:6px;border-radius:18px;box-shadow:0 15px 35px #0004,inset 0 1px #ffffff12}.cell{border-radius:9px;font-size:clamp(18px,6vw,35px)}.message{margin:4px 0 9px;min-height:22px}.game-actions{grid-template-columns:repeat(3,minmax(0,1fr))}.power-actions{grid-template-columns:repeat(3,minmax(0,1fr))}.game-panel .sectionhead{margin:16px 2px 8px}.settings-list{display:grid;gap:9px}.settings-list .toggle{min-height:52px}.settings-list .toggle select{max-width:55%;width:55%}.reward-panel{margin-bottom:12px}.bottom-nav{position:fixed;z-index:40;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px max(8px,env(safe-area-inset-bottom));background:#08111ff0;border-top:1px solid #7192b52e;backdrop-filter:blur(20px);box-shadow:0 -10px 30px #0003}.nav-item{border:0;background:transparent;color:#8195b1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:750;padding:5px 1px}.nav-item span{font-size:21px;line-height:1.1}.nav-item.active{color:var(--accent)}.play-nav span{display:grid;place-items:center;width:39px;height:31px;border-radius:11px;background:var(--accent);color:#06241d;box-shadow:0 0 18px #66ffe02c}.play-nav{color:var(--accent)}.footer{margin:22px 0 5px;font-size:9px;letter-spacing:.7px}.result-overlay{position:fixed;inset:0;z-index:70;background:#030812e8;backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px}.result-overlay.open{display:flex}.result-card{width:min(100%,390px);padding:25px;text-align:center;border:1px solid #7cebdc55;border-radius:25px;background:radial-gradient(ellipse at top,#264d62,#15243a 65%);box-shadow:0 25px 80px #000b}.result-emblem{font-size:48px;color:var(--gold);text-shadow:0 0 24px #ffd16666}.result-card h2{font-size:34px;margin:4px 0 8px}.result-card p{color:var(--muted);font-size:13px}.result-stars{font-size:31px;letter-spacing:6px;color:var(--gold);margin:10px 0 18px}.pause-overlay{position:fixed;inset:0;z-index:60;background:#030812d9;backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}.pause-overlay.open{display:flex}.pause-card{width:min(100%,390px);padding:24px;border:1px solid #6b91b744;border-radius:24px;background:linear-gradient(145deg,#1c304b,#101a2c);box-shadow:0 25px 80px #0009}.pause-card h2{font-size:32px;margin:0 0 8px}.pause-card p{color:var(--muted);font-size:13px;margin:0 0 16px}.progressbar{margin-bottom:15px}
-@media(min-width:650px){.hero{padding-top:38px}.hero-art{width:360px}.home-grid{grid-template-columns:repeat(4,1fr)}.home-card{min-height:135px}.levels{grid-template-columns:repeat(10,minmax(0,1fr))}.board{width:min(100%,540px)}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(100%,700px);border:1px solid #7192b52e;border-bottom:0;border-radius:18px 18px 0 0}.app{padding-bottom:115px}}
+/* ULTRA v11: daily missions */
+.mission-list{display:grid;gap:10px}.mission-card{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid #dceafa;border-radius:17px;background:linear-gradient(145deg,#fff,#f3f9ff);color:#15274a}.mission-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#e5f2ff;font-size:22px}.mission-title{font-size:13px;font-weight:900}.mission-sub{font-size:11px;color:#71829b;margin-top:3px}.mission-progress{height:6px;background:#dce9f8;border-radius:99px;overflow:hidden;margin-top:8px}.mission-progress span{display:block;height:100%;background:linear-gradient(90deg,#0879ee,#21c3d9);border-radius:99px;transition:width .25s}.mission-side{text-align:center;min-width:65px}.mission-reward{font-size:11px;font-weight:900;color:#a36a00;margin-bottom:5px}.mission-side .btn{font-size:10px;padding:7px 8px;white-space:nowrap}.mission-card.claimed{background:linear-gradient(145deg,#e9fbf2,#fff);border-color:#bcebd5}.mission-card.claimed .mission-icon{background:#d8f8e8}
 
 </style>
 </head>
 <body>
 <main class="app">
- <header class="top"><button class="nav-icon" id="backBtn" aria-label="Back" style="display:none">‹</button><div class="logo">➜ <span>ARROW</span> PUZZLE PRO</div><div style="display:flex;align-items:center;gap:7px"><button type="button" class="install-btn" id="installBtn">＋ Install</button><button class="nav-icon" id="menuBtn" aria-label="Menu">☰</button><div class="tag">ULTRA · PWA</div></div></header>
- <div class="pwa-status" id="pwaStatus" aria-live="polite">Checking app status…</div>
- <section class="screen active" id="screen-home">
-  <div class="hero"><div class="eyebrow">ARROW PUZZLE PRO · SEASON 01</div><h1>Think.<br><span>Tap. Clear.</span></h1><p class="sub">Har arrow ko sahi order mein clear karo. 100 levels, boss fights aur daily challenges tumhara intezaar kar rahe hain.</p><div class="hero-art" aria-hidden="true"><div class="art-tile">↗</div><div class="art-tile">↑</div><div class="art-tile">↘</div><div class="art-tile">←</div><div class="art-tile glow">→</div><div class="art-tile">↓</div><div class="art-tile">↖</div><div class="art-tile">↙</div><div class="art-tile">↗</div></div><button class="btn primary big-btn" id="homePlay">▶ PLAY NOW</button><div class="home-mini-stats"><div><strong id="homeWins">0</strong><small>WINS</small></div><div><strong id="homeCoins">0</strong><small>COINS</small></div><div><strong id="homeProgress">0%</strong><small>PROGRESS</small></div></div></div>
-  <div class="home-grid"><button class="home-card" id="homeLevels"><span>▦</span><strong>Level Map</strong><small>Choose your stage</small></button><button class="home-card" id="homeDaily"><span>☀</span><strong>Daily Challenge</strong><small>New board every day</small></button><button class="home-card" id="homeRewards"><span>♜</span><strong>Rewards</strong><small>Coins & achievements</small></button><button class="home-card" id="homeSettings"><span>⚙</span><strong>Settings</strong><small>Themes, skins & save</small></button></div>
+ <header class="top"><div class="logo">➜ <span>ARROW</span> PUZZLE ULTRA</div><div class="top-right"><div class="tag">500 LEVELS · OFFLINE</div><button class="icon-btn" id="homeBtn" aria-label="Open home dashboard">⌂</button><button class="icon-btn" id="menuBtn" aria-label="Open game menu">☰</button></div></header>
+ <h1>Tap Away <span class="title-blue">Arrows</span></h1><p class="sub">Look. Think. Tap. Clear! Arrow ke saamne raasta khaali ho tabhi use tap karein. Har level mein naye logic challenges unlock karein.</p>
+ <section class="panel">
+  <div class="controls">
+   <div class="field"><label for="levelSelect">LEVEL</label><select id="levelSelect"></select></div>
+   <div class="field"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
+  </div>
+  <div class="featureline"><span class="chip" id="modeChip">CLASSIC</span><span class="chip" id="bossChip">BOSS: EVERY 10</span><span class="chip" id="dailyChip">DAILY: AVAILABLE</span><span class="chip active" id="coinChip">🪙 0 COINS</span></div>
+  <div class="stats">
+   <div class="stat"><strong id="remaining">0</strong><small>ARROWS LEFT</small></div>
+   <div class="stat"><strong id="moves">0</strong><small>MOVES</small></div>
+   <div class="stat"><strong id="timer">00:00</strong><small>TIME</small></div>
+   <div class="stat"><strong id="stars">☆☆☆</strong><small>LEVEL STARS</small></div>
+  </div>
+  <div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div>
+  <div id="message" class="message" aria-live="polite">Choose a level and start clearing arrows.</div>
+  <div class="actions">
+   <button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button>
+  </div>
+  <div class="sectionhead" style="margin-top:15px"><h2>Power-ups</h2><span class="muted">Limited use per board</span></div>
+  <div class="actions">
+   <button class="btn gold" id="scanBtn">👁 Scan (2)</button><button class="btn" id="burstBtn">⚡ Clear (1)</button><button class="btn" id="shieldBtn">🛡 Shield (1)</button>
+  </div>
+  <div class="options">
+   <div class="toggle"><label for="skin">BOARD THEME</label><select id="skin"><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="light">Light</option></select></div>
+   <div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div>
+   <div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div>
+  </div>
+  <div class="sectionhead"><h2>🎡 Daily Spin</h2><span class="muted">One free spin each day</span></div>
+ <section class="panel reward-arcade">
+  <div class="spin-card">
+   <div class="section-pill">DAILY BONUS</div><div class="spin-orb" id="spinOrb"><span>🎁</span></div>
+   <strong id="spinTitle">Try your luck!</strong><p class="spin-caption" id="spinCaption">Spin to win bonus coins. Reward is saved on this device.</p>
+   <button class="btn primary" id="spinBtn">🎡 Spin & Win</button>
+  </div>
+  <div id="shopPanel">
+   <div class="section-pill">ARROW SKIN SHOP</div><div class="shop-grid" id="shopGrid">
+    <div class="shop-item" data-shop-skin="classic"><div class="shop-icon">➜</div><strong>Classic</strong><small>Free forever</small><button class="btn" data-buy-skin="classic">Use Skin</button></div>
+    <div class="shop-item" data-shop-skin="crystal"><div class="shop-icon">💎</div><strong>Crystal</strong><small>20 coins</small><button class="btn" data-buy-skin="crystal">Unlock</button></div>
+    <div class="shop-item" data-shop-skin="fire"><div class="shop-icon">🔥</div><strong>Fire</strong><small>35 coins</small><button class="btn" data-buy-skin="fire">Unlock</button></div>
+    <div class="shop-item" data-shop-skin="gold"><div class="shop-icon">👑</div><strong>Gold</strong><small>50 coins</small><button class="btn" data-buy-skin="gold">Unlock</button></div>
+   </div>
+   <p class="v10-note">Earn coins by completing levels, daily rewards, and milestone challenges.</p>
+  </div>
  </section>
- <section class="screen" id="screen-levels">
-  <div class="page-heading"><div class="eyebrow">YOUR JOURNEY</div><h1>Level Map</h1><p class="sub">Complete levels to unlock the next stages. Every 10th level is a Boss Level.</p></div>
-  <section class="panel"><div class="controls"><div class="field"><label for="levelSelect">START LEVEL</label><select id="levelSelect"></select></div><div class="field"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div></div><div class="row level-progress-row"><strong id="progressText">0 / 100 complete</strong><span class="muted">Levels</span></div><div class="progressbar"><div id="progressFill" class="progressfill"></div></div><div id="levels" class="levels"></div><button class="btn primary wide-btn" id="startSelected">PLAY SELECTED LEVEL →</button></section>
+ <div class="sectionhead" style="margin-top:15px"><h2>Save Backup</h2><span class="muted">Move progress between browsers</span></div>
+  <div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div>
+  <input id="importFile" type="file" accept="application/json,.json" hidden>
+  <p class="info">💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
  </section>
- <section class="screen" id="screen-game">
-  <div class="game-head"><div><div class="eyebrow" id="gameEyebrow">LEVEL 1</div><h1 id="gameTitle">Level 1</h1></div><button class="btn pause-btn" id="pauseBtn">Ⅱ Pause</button></div>
-  <div class="game-meta"><span class="chip" id="modeChip">CLASSIC</span><span class="chip boss" id="bossChip">BOSS: EVERY 10</span><span class="chip active" id="dailyChip">DAILY</span><span class="chip active" id="coinChip">🪙 0 COINS</span></div>
-  <div class="stats"><div class="stat"><strong id="remaining">0</strong><small>ARROWS LEFT</small></div><div class="stat"><strong id="moves">0</strong><small>MOVES</small></div><div class="stat"><strong id="timer">00:00</strong><small>TIME</small></div><div class="stat"><strong id="stars">☆☆☆</strong><small>STARS</small></div></div>
-  <section class="panel game-panel"><div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div><div id="message" class="message" aria-live="polite">Level ready. Clear the arrows!</div><div class="actions game-actions"><button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button></div><div class="sectionhead"><h2>Power-ups</h2><span class="muted">Limited per board</span></div><div class="actions power-actions"><button class="btn gold" id="scanBtn">👁 Scan (2)</button><button class="btn" id="burstBtn">⚡ Clear (1)</button><button class="btn" id="shieldBtn">🛡 Shield (1)</button></div></section>
+ <div class="sectionhead"><h2>Daily Rewards</h2><span class="muted">Claim once per day</span></div>
+ <section class="panel" style="padding:12px">
+  <div class="row"><div><strong id="rewardTitle">🎁 Daily login reward</strong><div class="muted" id="rewardText">Claim coins to unlock arrow skins.</div></div><button class="btn primary" id="claimBtn" type="button">Claim +10 🪙</button></div>
  </section>
- <section class="screen" id="screen-rewards">
-  <div class="page-heading"><div class="eyebrow">PLAY · EARN · UNLOCK</div><h1>Rewards</h1><p class="sub">Claim your daily coins and track your puzzle achievements.</p></div>
-  <section class="panel reward-panel"><div class="row"><div><strong id="rewardTitle">🎁 Daily login reward</strong><div class="muted" id="rewardText">Claim coins to unlock arrow skins.</div></div><button class="btn primary" id="claimBtn" type="button">Claim +10 🪙</button></div></section>
-  <div class="sectionhead"><h2>Achievements</h2><span class="muted">Unlock as you play</span></div><section class="panel"><div id="achievements" class="featureline"></div><div class="stats"><div class="stat"><strong id="totalWins">0</strong><small>WINS</small></div><div class="stat"><strong id="totalStars">0</strong><small>STARS</small></div><div class="stat"><strong id="bestStreak">0</strong><small>DAILY STREAK</small></div><div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div></div></section>
+ <div class="sectionhead"><h2>🎯 Daily Missions</h2><span class="muted" id="missionDateLabel">Resets daily</span></div>
+ <section class="panel" style="padding:12px">
+  <div id="missionList" class="mission-list"></div>
+  <p class="v10-note">Complete today's tasks to earn extra coins. Progress is saved on this device and resets each day.</p>
  </section>
- <section class="screen" id="screen-settings">
-  <div class="page-heading"><div class="eyebrow">MAKE IT YOURS</div><h1>Settings</h1><p class="sub">Customize your board and manage your saved progress.</p></div>
-  <section class="panel"><div class="settings-list"><div class="toggle"><label for="skin">BOARD THEME</label><select id="skin"><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="light">Light</option></select></div><div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div><div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div></div><div class="sectionhead"><h2>Save Backup</h2><span class="muted">Transfer progress</span></div><p class="info">Export your save before changing browser or device. Import restores a previous backup.</p><div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div><input id="importFile" type="file" accept="application/json,.json" hidden></section>
+ <div class="sectionhead"><h2>🏆 Challenges</h2><span class="muted">Milestone rewards</span></div>
+ <section class="panel challenge-panel" style="padding:12px">
+  <div id="challengeList" class="challenge-list"></div>
  </section>
- <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-screen="home"><span>⌂</span>Home</button><button class="nav-item" data-screen="levels"><span>▦</span>Levels</button><button class="nav-item play-nav" id="navPlay"><span>▶</span>Play</button><button class="nav-item" data-screen="rewards"><span>♜</span>Rewards</button><button class="nav-item" data-screen="settings"><span>⚙</span>Settings</button></nav>
- <div class="footer">ARROW PUZZLE PRO · ULTRA PWA · MOBILE GAME</div>
- <div class="result-overlay" id="resultOverlay"><div class="result-card"><div class="result-emblem" id="resultEmblem">★</div><div class="eyebrow">LEVEL COMPLETE</div><h2 id="resultTitle">Brilliant!</h2><p id="resultText">You cleared the board.</p><div class="result-stars" id="resultStars">★★★</div><button class="btn primary wide-btn" id="resultNext">Next Level →</button><button class="btn wide-btn" id="resultReplay">↻ Play Again</button><button class="btn wide-btn" id="resultLevels">▦ Level Map</button></div></div>
- <div class="pause-overlay" id="pauseOverlay"><div class="pause-card"><div class="eyebrow">GAME PAUSED</div><h2>Take a breath.</h2><p>Your level progress is waiting.</p><button class="btn primary wide-btn" id="resumeBtn">▶ Resume Game</button><button class="btn wide-btn" id="pauseRestart">↻ Restart Level</button><button class="btn wide-btn" id="pauseLevels">▦ Level Map</button><button class="btn wide-btn" id="pauseHome">⌂ Main Menu</button></div></div>
+ <div class="sectionhead"><h2>Level Map</h2><span class="muted" id="progressText">0 / 500 complete</span></div>
+ <div class="progressbar"><div id="progressFill" class="progressfill"></div></div>
+ <div id="levels" class="levels"></div>
+ <div class="sectionhead"><h2>Achievements</h2><span class="muted">Unlock as you play</span></div>
+ <section class="panel" style="padding:12px">
+  <div id="achievements" class="featureline"></div>
+  <div class="stats" style="margin-bottom:0">
+   <div class="stat"><strong id="totalWins">0</strong><small>WINS</small></div>
+   <div class="stat"><strong id="totalStars">0</strong><small>STARS</small></div>
+   <div class="stat"><strong id="bestStreak">0</strong><small>DAILY STREAK</small></div>
+   <div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div>
+  </div>
+ </section>
+ <div class="footer">ARROW PUZZLE ULTRA v11 · 500 LEVELS · DAILY MISSIONS · REWARD ARCADE</div>
 </main>
+<div class="overlay" id="homeOverlay" role="dialog" aria-modal="true" aria-labelledby="homeTitle">
+ <section class="overlay-card home-card">
+  <div class="home-hero"><div class="home-mark">➜</div><div class="home-kicker">PUZZLE ADVENTURE</div><h2 id="homeTitle">Arrow Puzzle <span>ULTRA</span></h2><p>Look · Think · Tap · Clear</p></div>
+  <div class="home-stats"><div><strong id="homeCoins">0</strong><small>🪙 COINS</small></div><div><strong id="homeWins">0</strong><small>🏆 WINS</small></div><div><strong id="homeStreak">0</strong><small>🔥 DAY STREAK</small></div></div>
+  <div class="home-section-title"><strong>Daily Challenge</strong><span id="homeTodayLabel">TODAY</span></div>
+  <div id="dailyCalendar" class="daily-calendar" aria-label="Last seven days daily challenge progress"></div>
+  <button class="btn primary home-play" id="homePlay">▶ Continue Playing</button>
+  <div class="home-actions"><button class="btn" id="homeDaily">📅 Daily Challenge</button><button class="btn" id="homeLevels">▦ Level Map</button><button class="btn" id="homeChallenges">🏆 Challenges</button><button class="btn" id="homeShop">🪙 Skins & Shop</button></div>
+  <p class="home-note">Your progress is saved on this device. Keep your daily streak alive!</p>
+  <button class="btn home-close" id="homeClose">Back to Game</button>
+ </section>
+</div>
+<div class="overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+ <section class="overlay-card menu-card"><div class="row"><div style="text-align:left"><h2 id="menuTitle">Arrow Puzzle</h2><p style="margin:0">Look · Think · Tap · Clear</p></div><button class="icon-btn" id="closeMenu" aria-label="Close menu">×</button></div>
+  <div class="menu-grid"><button class="btn primary" id="menuContinue">▶ Continue</button><button class="btn" id="menuRestart">↻ Restart</button><button class="btn" id="menuDaily">📅 Daily Challenge</button><button class="btn" id="menuLevels">▦ Level Map</button><button class="btn" id="menuChallenges">🏆 Challenges</button><button class="btn" id="menuShop">🪙 Skins & Shop</button></div>
+  <p>Progress is saved automatically on this device.</p>
+ </section>
+</div>
+<div class="overlay" id="completeOverlay" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+ <section class="overlay-card"><div class="overlay-emoji">🏆</div><h2 id="completeTitle">Level Completed!</h2><div id="completeStars" style="font-size:30px;color:#f5b800;letter-spacing:3px">★★★</div><p id="completeSubtitle">Brilliant! You cleared every arrow.</p>
+  <div class="overlay-stats"><div class="overlay-stat"><strong id="completeMoves">0</strong><small>MOVES</small></div><div class="overlay-stat"><strong id="completeTime">00:00</strong><small>TIME</small></div><div class="overlay-stat"><strong id="completeCoins">+0</strong><small>COINS</small></div></div>
+  <div class="overlay-actions"><button class="btn" id="completeHome">⌂ Home</button><button class="btn" id="completeReplay">↻ Replay</button><button class="btn primary wide" id="completeNext">▶ Next Level</button></div>
+ </section>
+</div>
 <script>
 (()=> {
  'use strict';
-
  const $=id=>document.getElementById(id);
- let currentScreen='home',lastScreen='home';
- function showScreen(name){
-  const valid=['home','levels','game','rewards','settings']; if(!valid.includes(name))name='home';
-  if(name==='game')lastScreen='game';
-  if(name!=='game'&&timerHandle){elapsedBefore=getTime();startedAt=0;stopTimer();}
-  currentScreen=name;
-  if(name==='game'&&!timerHandle&&!finished)startTimer();
-  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+name));
-  document.querySelectorAll('.nav-item[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));
-  $('backBtn').style.display=name==='home'?'none':'grid';
-  $('menuBtn').style.display=name==='game'?'none':'grid';
-  if(name==='home'){
-   const completed=Object.values(saved.levels||{}).filter(v=>v&&v.complete).length;
-   $('homeWins').textContent=saved.stats?.wins||completed;$('homeCoins').textContent=saved.coins||0;$('homeProgress').textContent=Math.min(100,Math.round(completed/100*100))+'%';
-  }
-  window.scrollTo({top:0,behavior:'instant'});
- }
- function goPlay(){showScreen('game');render();}
-
  const dirs=[{x:0,y:-1,ch:'↑',name:'up'},{x:1,y:0,ch:'→',name:'right'},{x:0,y:1,ch:'↓',name:'down'},{x:-1,y:0,ch:'←',name:'left'}];
  const configs={easy:{size:5,density:.53},medium:{size:6,density:.66},hard:{size:7,density:.72}};
  const themes={
@@ -148,8 +195,13 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
  let level=1,diff='easy',mode='classic',size=5,cells=[],moves=0,hintIndex=-1,finished=false,history=[],soundOn=true,boardVersion=0;
  let startedAt=0,elapsedBefore=0,timerHandle=null,dailyFinished=false,power={scan:2,burst:1,shield:1},shieldReady=false,scanActive=false;
  const storeKey='arrowPuzzlePro_v3';
- let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',coins:0,claimedDay:'',unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
- try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(x&&typeof x==='object')saved={...saved,...x,levels:x.levels||{},daily:x.daily||{},stats:x.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:x.achievements||{},unlockedSkins:x.unlockedSkins||['classic'],coins:x.coins||0,claimedDay:x.claimedDay||'',arrowSkin:x.arrowSkin||'classic'};}catch(e){}
+ let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',coins:0,claimedDay:'',challengeClaims:[],unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
+ try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(x&&typeof x==='object')saved={...saved,...x,levels:x.levels||{},daily:x.daily||{},stats:x.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:x.achievements||{},unlockedSkins:x.unlockedSkins||['classic'],coins:x.coins||0,claimedDay:x.claimedDay||'',challengeClaims:x.challengeClaims||[],arrowSkin:x.arrowSkin||'classic'};}catch(e){}
+ function ensureMissions(){
+  if(!saved.missions||saved.missions.date!==today())saved.missions={date:today(),moves:0,hints:0,clears:0,claimed:[]};
+  saved.missions.moves=Number(saved.missions.moves)||0;saved.missions.hints=Number(saved.missions.hints)||0;saved.missions.clears=Number(saved.missions.clears)||0;saved.missions.claimed=Array.isArray(saved.missions.claimed)?saved.missions.claimed:[];
+  return saved.missions;
+ }
  const id=()=>mode==='daily'?`daily-${today()}-${diff}`:`${level}-${diff}`;
  const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
  const record=()=>mode==='daily'?saved.daily[id()]:saved.levels[id()];
@@ -184,8 +236,6 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
     if(clearRay(c,cells)){cells.push(c);break;}
    }
   }
-  // Guard against an empty board: generate a guaranteed solvable outward-facing fallback.
-  if(cells.length===0){for(let y=0;y<size;y++)for(let x=0;x<size;x++){let d;if(y===0)d=dirs[0];else if(x===size-1)d=dirs[1];else if(y===size-1)d=dirs[2];else if(x===0)d=dirs[3];else d=dirs[(x+y+level)%4];cells.push({x,y,d,gone:false});}}
   // Ensure a sensible board density for the selected mode.
   if(cells.length<5){
    for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(!cells.some(c=>c.x===x&&c.y===y)){
@@ -204,6 +254,32 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   r.style.setProperty('--bg',t.bg);r.style.setProperty('--tile',t.tile);r.style.setProperty('--empty',t.empty);r.style.setProperty('--line',t.line);r.style.setProperty('--accent',t.accent);r.style.setProperty('--text',t.text);
   saved.theme=name;persist();
  }
+ function renderShop(){
+  const owned=saved.unlockedSkins||['classic'];
+  document.querySelectorAll('[data-shop-skin]').forEach(card=>{
+   const skin=card.getAttribute('data-shop-skin'),btn=card.querySelector('button');
+   card.classList.toggle('owned',owned.includes(skin));
+   if(skin===(saved.arrowSkin||'classic')){btn.textContent='✓ Equipped';btn.disabled=true;}
+   else if(owned.includes(skin)){btn.textContent='Use Skin';btn.disabled=false;}
+   else{const cost={crystal:20,fire:35,gold:50}[skin]||0;btn.textContent=`Unlock · ${cost} 🪙`;btn.disabled=(saved.coins||0)<cost;}
+  });
+  const spun=saved.spinDay===today();$('spinBtn').disabled=spun;$('spinBtn').textContent=spun?'✓ Already spun today':'🎡 Spin & Win';
+  if(spun){$('spinTitle').textContent=`Today's reward: +${saved.spinReward||10} coins`;$('spinCaption').textContent='Come back tomorrow for another free spin.';}
+ }
+ function renderMissions(){
+  const box=$('missionList');if(!box)return;const m=ensureMissions();
+  $('missionDateLabel').textContent=`TODAY · ${today()}`;
+  const list=[
+   {id:'clear',icon:'🏁',title:'Clear 1 level',sub:'Finish any puzzle board',value:m.clears,target:1,reward:20},
+   {id:'moves',icon:'👆',title:'Make 10 valid moves',sub:'Tap arrows with a clear path',value:m.moves,target:10,reward:15},
+   {id:'hint',icon:'💡',title:'Use Smart Hint once',sub:'Try the Hint button during a game',value:m.hints,target:1,reward:10}
+  ];
+  box.innerHTML='';list.forEach(q=>{const claimed=m.claimed.includes(q.id),ready=q.value>=q.target&&!claimed,pct=Math.min(100,Math.round(q.value/q.target*100));
+   const card=document.createElement('div');card.className='mission-card'+(claimed?' claimed':'');
+   card.innerHTML=`<div class="mission-icon">${q.icon}</div><div><div class="mission-title">${q.title}</div><div class="mission-sub">${q.sub}</div><div class="mission-progress"><span style="width:${pct}%"></span></div><div class="mission-sub">${Math.min(q.value,q.target)} / ${q.target} complete</div></div><div class="mission-side"><div class="mission-reward">🪙 +${q.reward}</div><button class="btn ${ready?'primary':''}" ${ready?'':'disabled'} data-mission="${q.id}">${claimed?'✓ Claimed':ready?'Claim':'In progress'}</button></div>`;
+   card.querySelector('button').addEventListener('click',()=>{const current=ensureMissions();if(current.claimed.includes(q.id)||current[q.id==='clear'?'clears':q.id==='moves'?'moves':'hints']<q.target)return;current.claimed.push(q.id);saved.coins=(saved.coins||0)+q.reward;persist();render();msg(`🎯 Mission claimed! +${q.reward} coins added.`,'good');playTone(900,.12);});box.appendChild(card);
+  });
+ }
  function render(){
   const board=$('board');board.style.gridTemplateColumns=`repeat(${size},1fr)`;board.innerHTML='';document.body.classList.remove('skin-crystal','skin-fire','skin-gold');if(saved.arrowSkin&&saved.arrowSkin!=='classic')document.body.classList.add('skin-'+saved.arrowSkin);
   const map=new Map(cells.map((c,i)=>[`${c.x},${c.y}`,{c,i}]));
@@ -221,40 +297,61 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   $('remaining').textContent=left;$('moves').textContent=moves;$('timer').textContent=fmt(getTime());
   const rec=record();$('stars').textContent=rec?.stars?'★'.repeat(rec.stars)+'☆'.repeat(3-rec.stars):'☆☆☆';
   $('levelSelect').value=String(level);$('difficulty').value=diff;$('dailyMode').value=mode;
-  $('gameEyebrow').textContent=(mode==='daily'?'DAILY CHALLENGE':'LEVEL '+level)+(level%10===0&&mode==='classic'?' · BOSS':'');$('gameTitle').textContent=mode==='daily'?'Daily Challenge':'Level '+level;
-  $('homeWins').textContent=saved.stats?.wins||Object.values(saved.levels||{}).filter(v=>v&&v.complete).length;$('homeCoins').textContent=saved.coins||0;$('homeProgress').textContent=Math.min(100,Math.round(Object.values(saved.levels||{}).filter(v=>v&&v.complete).length/100*100))+'%';
   $('modeChip').textContent=mode==='daily'?'DAILY CHALLENGE':'CLASSIC';
   $('modeChip').className='chip '+(mode==='daily'?'active':'');
   $('bossChip').textContent=mode==='classic'&&level%10===0?'👑 BOSS LEVEL':'BOSS: EVERY 10';
   $('bossChip').className='chip '+(mode==='classic'&&level%10===0?'boss':'');
   $('dailyChip').textContent=`DAILY · ${today()}`;$('coinChip').textContent=`🪙 ${saved.coins||0} COINS`;$('arrowSkin').value=saved.arrowSkin||'classic';
   $('soundBtn').textContent=soundOn?'🔊 Sound On':'🔇 Sound Off';
-  renderLevels();
+  renderLevels();renderChallenges();renderShop();renderMissions();
  }
  function unlocked(n){
   if(n===1)return true;
   for(const d of Object.keys(configs))if(saved.levels[`${n-1}-${d}`]?.complete)return true;
   return false;
  }
+ function renderChallenges(){
+  const box=$('challengeList');if(!box)return;
+  const completed=new Set(Object.entries(saved.levels||{}).filter(([k,v])=>v&&v.complete).map(([k])=>Number(k.split('-')[0]))).size;
+  const milestones=[{n:40,reward:60},{n:70,reward:75},{n:100,reward:100},{n:150,reward:120},{n:220,reward:140},{n:300,reward:180},{n:500,reward:300}];
+  box.innerHTML='';
+  milestones.forEach(m=>{
+   const claimed=(saved.challengeClaims||[]).includes(m.n),ready=completed>=m.n&&!claimed;
+   const card=document.createElement('div');card.className='challenge-card';
+   const pct=Math.min(100,Math.round(completed/m.n*100));
+   card.innerHTML=`<div class="challenge-trophy">🏆</div><div><div class="challenge-name">Clear ${m.n} levels</div><div class="challenge-reward">🪙 +${m.reward} coins</div><div class="challenge-progress"><span style="width:${pct}%"></span></div><div class="challenge-count">${Math.min(completed,m.n)} / ${m.n} completed</div></div><div class="challenge-side">${Math.max(0,m.n-completed)}<small>levels to go</small><button class="btn challenge-claim" ${ready?'':'disabled'} data-milestone="${m.n}">${claimed?'Claimed':ready?'Claim':'Locked'}</button></div>`;
+   const b=card.querySelector('button');b.addEventListener('click',()=>{if(!ready)return;saved.challengeClaims=saved.challengeClaims||[];saved.challengeClaims.push(m.n);saved.coins=(saved.coins||0)+m.reward;persist();render();msg(`🏆 Challenge complete! +${m.reward} coins added.`,'good');playTone(900,.12);});
+   box.appendChild(card);
+  });
+ }
  function renderLevels(){
   const box=$('levels');box.innerHTML='';
   let completed=0;
-  for(let n=1;n<=100;n++){
+  for(let n=1;n<=500;n++){
    const all=Object.keys(configs).every(d=>saved.levels[`${n}-${d}`]?.complete);
    if(all)completed++;
    const b=document.createElement('button');b.className='lv'+(n===level&&mode==='classic'?' current':'')+(all?' done':'');
    b.disabled=!unlocked(n);b.innerHTML=`${unlocked(n)?n:'🔒'}${n%10===0?'<small>👑 BOSS</small>':''}`;
-   b.addEventListener('click',()=>{level=n;mode='classic';$('dailyMode').value=mode;resetGame();showScreen('game');});
+   b.addEventListener('click',()=>{level=n;mode='classic';$('dailyMode').value=mode;resetGame();window.scrollTo({top:0,behavior:'smooth'});});
    box.appendChild(b);
   }
-  $('progressText').textContent=`${completed} / 100 complete`;
+  $('progressText').textContent=`${completed} / 500 complete`;
   $('progressFill').style.width=`${completed}%`;
  }
+ function renderHome(){
+  $('homeCoins').textContent=String(saved.coins||0);$('homeWins').textContent=String(saved.stats?.wins||0);$('homeStreak').textContent=String(saved.stats?.streak||0);$('homeTodayLabel').textContent=today();
+  const box=$('dailyCalendar');box.innerHTML='';
+  const base=new Date();base.setHours(0,0,0,0);
+  const names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  for(let back=6;back>=0;back--){const d=new Date(base);d.setDate(base.getDate()-back);const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const done=Object.entries(saved.daily||{}).some(([k,v])=>k.startsWith(`daily-${key}-`)&&v?.complete);const el=document.createElement('div');el.className='day-dot'+(done?' done':'')+(back===0?' today':'');el.innerHTML=`<strong>${names[d.getDay()]}</strong><span>${done?'✓':back===0?'•':'·'}</span><small>${d.getDate()}</small>`;box.appendChild(el);}
+ }
+ function openHome(){renderHome();$('homeOverlay').classList.add('open');}
+ function closeHome(){$('homeOverlay').classList.remove('open');}
  function resetGame(){
   stopTimer();moves=0;hintIndex=-1;finished=false;history=[];elapsedBefore=0;startedAt=0;
   if(mode==='daily'&&saved.daily[id()]?.complete){dailyFinished=true;msg('Aaj ka Daily Challenge complete ho chuka hai. Replay karke apna score improve karo.');}
   else {dailyFinished=false;msg(mode==='daily'?`Daily Challenge · ${diff} · ${today()}`:`Level ${level} · ${diff[0].toUpperCase()+diff.slice(1)}${level%10===0?' · BOSS FIGHT':''}`);}
-  makeBoard();if(currentScreen==='game')startTimer();render();
+  makeBoard();startTimer();render();
  }
  function playTone(freq=600,duration=.07){
   if(!soundOn)return;
@@ -264,18 +361,29 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   const c=cells[i];if(!c||c.gone||finished)return;
   if(!clearRay(c)){if(shieldReady){shieldReady=false;msg('🛡 Shield ne blocked move ko protect kiya.','good');playTone(360,.08);}else{msg('Raasta blocked hai. Pehle saamne wala arrow hatao.','warn');playTone(180,.08);}return;}
   history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});
-  c.gone=true;moves++;hintIndex=-1;scanActive=false;playTone(680,.045);
+  c.gone=true;moves++;ensureMissions().moves++;hintIndex=-1;scanActive=false;playTone(680,.045);
   if(cells.every(v=>v.gone))completeGame();
   else msg('Nice move! Agla clear arrow dhoondo.','good');
   render();
  }
  function completeGame(){
-  finished=true;stopTimer();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
+  finished=true;stopTimer();ensureMissions().clears++;persist();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
   const entry={complete:true,stars:Math.max(stars,old?.stars||0),bestMoves:Math.min(moves,old?.bestMoves??Infinity),bestTime:Math.min(t,old?.bestTime??Infinity),lastTime:t};
   if(mode==='daily')saved.daily[k]=entry;else saved.levels[k]=entry;
-  persist();msg(`🎉 ${mode==='daily'?'Daily Challenge':'Level '+level} complete! ${'★'.repeat(stars)} · ${moves} moves · ${fmt(t)}`,'good');$('resultTitle').textContent=mode==='daily'?'Daily Challenge Clear!':'Level '+level+' Clear!';$('resultText').textContent=`${moves} moves · ${fmt(t)} · ${saved.coins||0} coins`; $('resultStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);$('resultNext').style.display=(mode==='daily'||level>=100)?'none':'block';$('resultOverlay').classList.add('open');playTone(880,.18);
+  const firstClear=!old?.complete;
+  const coinReward=firstClear?(5+stars*3):0;saved.coins=(saved.coins||0)+coinReward;
+  if(firstClear){saved.stats=saved.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''};saved.stats.wins=(saved.stats.wins||0)+1;saved.stats.stars=(saved.stats.stars||0)+stars;saved.stats.moves=(saved.stats.moves||0)+moves;}
+  if(mode==='daily'&&firstClear){
+   const last=saved.stats.lastDaily||'';const now=new Date(today()+'T00:00:00');const prev=last?new Date(last+'T00:00:00'):null;const days=prev?Math.round((now-prev)/86400000):0;
+   if(last!==today()){saved.stats.streak=days===1?(saved.stats.streak||0)+1:1;saved.stats.lastDaily=today();saved.stats.bestStreak=Math.max(saved.stats.bestStreak||0,saved.stats.streak||0);}
+  }
+  persist();msg(`🎉 ${mode==='daily'?'Daily Challenge':'Level '+level} complete! ${'★'.repeat(stars)} · ${moves} moves · ${fmt(t)}`,'good');playTone(880,.18);
+  $('completeStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
+  $('completeSubtitle').textContent=`${mode==='daily'?'Daily Challenge complete!':`Level ${level} complete!`} ${stars===3?'Perfect run!':stars===2?'Great work!':'Nice effort!'}`;
+  $('completeMoves').textContent=String(moves);$('completeTime').textContent=fmt(t);$('completeCoins').textContent='+'+coinReward;
+  $('completeNext').textContent=level>=500?'▶ Play Daily Challenge':'▶ Next Level';$('completeOverlay').classList.add('open');
  }
- $('levelSelect').innerHTML=Array.from({length:100},(_,i)=>`<option value="${i+1}">Level ${i+1}${(i+1)%10===0?' · Boss':''}</option>`).join('');
+ $('levelSelect').innerHTML=Array.from({length:500},(_,i)=>`<option value="${i+1}">Level ${i+1}${(i+1)%10===0?' · Boss':''}</option>`).join('');
  $('levelSelect').addEventListener('change',e=>{level=+e.target.value;mode='classic';$('dailyMode').value=mode;resetGame();});
  $('difficulty').addEventListener('change',e=>{diff=e.target.value;resetGame();});
  $('dailyMode').addEventListener('change',e=>{mode=e.target.value;resetGame();});
@@ -295,6 +403,17 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   $('rewardTitle').textContent='🎉 Reward claimed!';$('rewardText').textContent='10 coins added. Level complete karke aur coins kamao.';
   $('claimBtn').textContent='Claimed today';$('claimBtn').disabled=true;msg('Daily login reward: +10 coins!','good');playTone(900,.12);
  });
+ $('spinBtn').addEventListener('click',()=>{
+  if(saved.spinDay===today()){msg('Aaj ka spin pehle hi use ho chuka hai. Kal phir try karein.','warn');return;}
+  const orb=$('spinOrb');orb.classList.remove('spinning');void orb.offsetWidth;orb.classList.add('spinning');
+  const rewards=[10,15,20,25,40,50];const reward=rewards[Math.floor(Math.random()*rewards.length)];
+  saved.spinDay=today();saved.spinReward=reward;saved.coins=(saved.coins||0)+reward;persist();
+  $('spinTitle').textContent=`🎉 You won +${reward} coins!`;$('spinCaption').textContent='Coins added to your balance. One free spin returns tomorrow.';
+  render();msg(`Daily spin reward: +${reward} coins!`,'good');playTone(880,.14);setTimeout(()=>orb.classList.remove('spinning'),1250);
+ });
+ document.querySelectorAll('[data-buy-skin]').forEach(btn=>btn.addEventListener('click',()=>{
+  const skin=btn.getAttribute('data-buy-skin');$('arrowSkin').value=skin;$('arrowSkin').dispatchEvent(new Event('change',{bubbles:true}));
+ }));
  $('exportBtn').addEventListener('click',()=>{
   const blob=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='arrow-puzzle-save-'+today()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);msg('Save backup file download ho rahi hai.','good');
  });
@@ -307,7 +426,28 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   }catch(err){msg('Backup file valid nahi hai. Export ki hui JSON file select karein.','warn');}finally{e.target.value='';}
  });
  $('resetSaveBtn').addEventListener('click',()=>{if(!confirm('Kya aap sure hain? Saare levels, coins aur achievements reset ho jayenge.'))return;localStorage.removeItem(storeKey);location.reload();});
-
+ $('homeBtn').addEventListener('click',openHome);
+ $('homeClose').addEventListener('click',closeHome);
+ $('homeOverlay').addEventListener('click',e=>{if(e.target===$('homeOverlay'))closeHome();});
+ $('homePlay').addEventListener('click',closeHome);
+ $('homeDaily').addEventListener('click',()=>{closeHome();mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});});
+ $('homeLevels').addEventListener('click',()=>{closeHome();$('levels').scrollIntoView({behavior:'smooth',block:'start'});});
+ $('homeChallenges').addEventListener('click',()=>{closeHome();$('challengeList').scrollIntoView({behavior:'smooth',block:'center'});});
+ $('homeShop').addEventListener('click',()=>{closeHome();$('shopPanel').scrollIntoView({behavior:'smooth',block:'center'});});
+ $('menuBtn').addEventListener('click',()=>openMenu());
+ function openMenu(){ $('menuOverlay').classList.add('open'); }
+ function closeMenu(){ $('menuOverlay').classList.remove('open'); }
+ $('closeMenu').addEventListener('click',closeMenu);
+ $('menuRestart').addEventListener('click',()=>{closeMenu();resetGame();});
+ $('menuDaily').addEventListener('click',()=>{closeMenu();mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});});
+ $('menuContinue').addEventListener('click',closeMenu);$('menuLevels').addEventListener('click',()=>{closeMenu();document.getElementById('levels').scrollIntoView({behavior:'smooth',block:'start'});});
+ $('menuChallenges').addEventListener('click',()=>{closeMenu();document.getElementById('challengeList').scrollIntoView({behavior:'smooth',block:'center'});});
+ $('menuShop').addEventListener('click',()=>{closeMenu();document.getElementById('shopPanel').scrollIntoView({behavior:'smooth',block:'center'});});
+ $('menuOverlay').addEventListener('click',e=>{if(e.target===$('menuOverlay'))closeMenu();});
+ $('completeHome').addEventListener('click',()=>{$('completeOverlay').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});});
+ $('completeReplay').addEventListener('click',()=>{$('completeOverlay').classList.remove('open');resetGame();});
+ $('completeNext').addEventListener('click',()=>{$('completeOverlay').classList.remove('open');if(mode==='daily'){mode='classic';$('dailyMode').value='classic';}if(level<500){level++;resetGame();window.scrollTo({top:0,behavior:'smooth'});}else{mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});}});
+ $('completeOverlay').addEventListener('click',e=>{if(e.target===$('completeOverlay'))$('completeOverlay').classList.remove('open');});
 
 
  $('scanBtn').addEventListener('click',()=>{
@@ -317,7 +457,7 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
  $('burstBtn').addEventListener('click',()=>{
   if(finished)return;if(power.burst<=0){msg('Clear power-up khatam ho gaya.','warn');return;}
   const i=cells.findIndex(c=>!c.gone&&clearRay(c));if(i<0){msg('Abhi koi clear arrow nahi hai.','warn');return;}
-  power.burst--;history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});cells[i].gone=true;moves++;hintIndex=-1;scanActive=false;
+  power.burst--;history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});cells[i].gone=true;moves++;ensureMissions().moves++;hintIndex=-1;scanActive=false;
   $('burstBtn').textContent=`⚡ Clear (${power.burst})`;playTone(820,.08);
   if(cells.every(v=>v.gone))completeGame();else msg('Power-up used: ek available arrow clear hua.','good');render();
  });
@@ -329,44 +469,20 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   if(finished)return;
   hintIndex=cells.findIndex(c=>!c.gone&&clearRay(c));
   if(hintIndex<0){msg('Koi valid move nahi mila. Restart karke dekhein.','warn');return;}
-  render();msg('Gold highlight wale arrow par tap karein.','good');playTone(740,.06);
+  ensureMissions().hints++;persist();render();msg('Gold highlight wale arrow par tap karein.','good');playTone(740,.06);
  });
  $('undoBtn').addEventListener('click',()=>{
   if(!history.length||finished){msg('Undo ke liye koi pichhla move nahi hai.','warn');return;}
   const prev=history.pop();cells=prev.cells;moves=prev.moves;hintIndex=-1;render();msg('Pichhla move undo ho gaya.','good');playTone(420,.05);
  });
- $('restartBtn').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');resetGame();});
- $('shuffleBtn').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
+ $('restartBtn').addEventListener('click',resetGame);
+ $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
  $('nextBtn').addEventListener('click',()=>{
-  $('resultOverlay').classList.remove('open');
   if(mode==='daily'){mode='classic';$('dailyMode').value=mode;}
-  if(level<100){level=Math.min(100,level+1);resetGame();window.scrollTo({top:0,behavior:'smooth'});}
-  else {msg('Aap Level 100 par hain! Difficulty badal kar ya Daily Challenge khel kar dekhein.','good');}
+  if(level<500){level=Math.min(500,level+1);resetGame();window.scrollTo({top:0,behavior:'smooth'});}
+  else {msg('Aap Level 500 par hain! Difficulty badal kar ya Daily Challenge khel kar dekhein.','good');}
  });
-
- // Level-clear result screen actions.
- $('resultNext').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');if(level<100){level++;mode='classic';$('dailyMode').value=mode;resetGame();goPlay();}else showScreen('levels');});
- $('resultReplay').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');resetGame();goPlay();});
- $('resultLevels').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');showScreen('levels');});
- // Page-by-page navigation and pause/resume controls.
- document.querySelectorAll('.nav-item[data-screen]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen)));
- $('homePlay').addEventListener('click',()=>{mode='classic';$('dailyMode').value='classic';resetGame();goPlay();});
- $('homeLevels').addEventListener('click',()=>showScreen('levels'));
- $('homeDaily').addEventListener('click',()=>{mode='daily';$('dailyMode').value='daily';resetGame();goPlay();});
- $('homeRewards').addEventListener('click',()=>showScreen('rewards'));
- $('homeSettings').addEventListener('click',()=>showScreen('settings'));
- $('navPlay').addEventListener('click',()=>goPlay());
- $('startSelected').addEventListener('click',()=>{level=+$('levelSelect').value||1;mode='classic';$('dailyMode').value=mode;resetGame();goPlay();});
- $('backBtn').addEventListener('click',()=>showScreen(currentScreen==='game'?'levels':'home'));
- $('menuBtn').addEventListener('click',()=>showScreen('home'));
- $('pauseBtn').addEventListener('click',()=>{elapsedBefore=getTime();startedAt=0;stopTimer();$('pauseOverlay').classList.add('open');});
- $('resumeBtn').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');if(!finished)startTimer();});
- $('pauseRestart').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');resetGame();goPlay();});
- $('pauseLevels').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');showScreen('levels');});
- $('pauseHome').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');showScreen('home');});
- $('levelSelect').addEventListener('change',()=>{if(currentScreen==='levels')$('startSelected').textContent='PLAY LEVEL '+$('levelSelect').value+' →';});
-
  document.addEventListener('keydown',e=>{
   if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;
   if(e.key.toLowerCase()==='h')$('hintBtn').click();
@@ -377,29 +493,5 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
  resetGame();
 })();
 </script>
-
-<script>
-(()=>{
-  const installBtn=document.getElementById('installBtn');
-  const status=document.getElementById('pwaStatus');
-  let installPrompt=null;
-  const standalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
-  function updateStatus(){
-    if(standalone()){status.textContent='Installed app · '+(navigator.onLine?'Online':'Offline ready');installBtn.classList.remove('show');}
-    else status.textContent=(navigator.onLine?'Online':'Offline')+' · Add to Home Screen for app-like play';
-  }
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;if(!standalone())installBtn.classList.add('show');});
-  window.addEventListener('appinstalled',()=>{installPrompt=null;installBtn.classList.remove('show');status.textContent='Arrow Puzzle PRO ULTRA installed successfully.';});
-  installBtn.addEventListener('click',async()=>{
-    if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.remove('show');}
-    else {status.textContent='Chrome menu (⋮) → Add to Home screen / Install app.';}
-  });
-  window.addEventListener('online',updateStatus);window.addEventListener('offline',updateStatus);updateStatus();
-  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(()=>{status.textContent=(standalone()?'Installed app':'PWA ready')+' · Offline cache enabled';}).catch(()=>{status.textContent='PWA cache could not start; online play is still available.';}));
-  } else if(location.protocol==='file:') status.textContent='Preview mode · Host on HTTPS to enable PWA install and offline cache';
-})();
-</script>
-
 </body>
 </html>

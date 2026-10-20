@@ -12,7 +12,7 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
-<title>Arrow Puzzle PRO ULTRA v8 — 100 Levels</title>
+<title>Arrow Puzzle PRO ULTRA v9 — Multi-Screen PWA</title>
 <style>
 :root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
@@ -73,66 +73,70 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
 @media(max-width:390px){.logo{font-size:16px}.tag{font-size:9px;padding:6px}.top{padding:10px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat small{font-size:9px}.actions{gap:6px}.btn{font-size:12px;padding:10px 4px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
+
+/* v9: real multi-screen mobile game UI */
+.screen{display:none;animation:screenIn .22s ease-out}.screen.active{display:block}@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nav-icon{width:38px;height:38px;border-radius:12px;border:1px solid #6b91b744;background:#102036;color:#eff8ff;font-size:22px;font-weight:900;display:grid;place-items:center;flex-shrink:0}.top .logo{flex:1}.top{gap:8px}.app{padding-bottom:100px}.hero{padding:24px 2px 8px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:var(--accent);margin-bottom:10px}.hero h1,.page-heading h1,.game-head h1{margin:0 0 12px;font-size:clamp(38px,10vw,62px);line-height:.98;letter-spacing:-2px}.hero h1 span{color:var(--accent);text-shadow:0 0 28px #66ffe033}.hero .sub{font-size:14px;max-width:560px}.hero-art{width:min(100%,330px);aspect-ratio:1.45;margin:18px auto 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;transform:perspective(600px) rotateX(9deg);padding:10px;border-radius:22px;background:linear-gradient(145deg,#172b44,#0b1525);border:1px solid #7ba7cf2c;box-shadow:0 24px 50px #0005}.art-tile{display:grid;place-items:center;border-radius:13px;border:1px solid #6c94b64a;background:linear-gradient(145deg,#203c59,#0d1a2c);font-size:clamp(24px,7vw,36px);font-weight:950;color:#8aa9c8;box-shadow:inset 0 1px #fff2,0 5px 0 #050b13;transform:translateY(-2px)}.art-tile.glow{color:var(--accent);border-color:#66ffe0aa;text-shadow:0 0 14px #66ffe0;box-shadow:inset 0 1px #fff4,0 5px 0 #063a36,0 0 25px #66ffe027}.big-btn{font-size:16px;letter-spacing:1px;padding:17px 12px;border-radius:15px}.wide-btn{width:100%;margin-top:9px;padding:14px}.home-mini-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:18px 0 8px;padding:14px 4px;border-top:1px solid #8caac21f;border-bottom:1px solid #8caac21f}.home-mini-stats div{text-align:center}.home-mini-stats strong{display:block;font-size:24px}.home-mini-stats small{font-size:9px;letter-spacing:1px;color:var(--muted)}.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0 8px}.home-card{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;padding:17px 14px;border-radius:17px;border:1px solid #7699bd36;background:linear-gradient(145deg,#192b43,#101c2e);color:var(--text);min-height:118px}.home-card span{font-size:24px;color:var(--accent);margin-bottom:5px}.home-card strong{font-size:14px}.home-card small{font-size:11px;color:var(--muted)}.page-heading{padding:24px 2px 14px}.page-heading h1{font-size:clamp(34px,9vw,48px)}.page-heading .sub{margin-bottom:0}.level-progress-row{margin:10px 2px}.levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.lv{aspect-ratio:1;padding:3px;font-size:14px;border-radius:13px;background:linear-gradient(145deg,#203751,#101d30);box-shadow:inset 0 1px #fff1,0 3px 0 #050a12}.lv.current{box-shadow:0 0 18px #66ffe033,0 3px 0 #0d6c5a}.lv small{font-size:8px}.game-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:20px 2px 10px}.game-head h1{font-size:clamp(29px,7vw,42px);margin:0}.pause-btn{min-width:84px}.game-meta{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}.game-meta .chip{font-size:9px;padding:6px 8px}.game-panel{padding:clamp(9px,2vw,16px)}.board-wrap{padding:3px 0 8px}.board{width:min(100%, min(82vw,500px));gap:3px;padding:6px;border-radius:18px;box-shadow:0 15px 35px #0004,inset 0 1px #ffffff12}.cell{border-radius:9px;font-size:clamp(18px,6vw,35px)}.message{margin:4px 0 9px;min-height:22px}.game-actions{grid-template-columns:repeat(3,minmax(0,1fr))}.power-actions{grid-template-columns:repeat(3,minmax(0,1fr))}.game-panel .sectionhead{margin:16px 2px 8px}.settings-list{display:grid;gap:9px}.settings-list .toggle{min-height:52px}.settings-list .toggle select{max-width:55%;width:55%}.reward-panel{margin-bottom:12px}.bottom-nav{position:fixed;z-index:40;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px max(8px,env(safe-area-inset-bottom));background:#08111ff0;border-top:1px solid #7192b52e;backdrop-filter:blur(20px);box-shadow:0 -10px 30px #0003}.nav-item{border:0;background:transparent;color:#8195b1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:750;padding:5px 1px}.nav-item span{font-size:21px;line-height:1.1}.nav-item.active{color:var(--accent)}.play-nav span{display:grid;place-items:center;width:39px;height:31px;border-radius:11px;background:var(--accent);color:#06241d;box-shadow:0 0 18px #66ffe02c}.play-nav{color:var(--accent)}.footer{margin:22px 0 5px;font-size:9px;letter-spacing:.7px}.result-overlay{position:fixed;inset:0;z-index:70;background:#030812e8;backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px}.result-overlay.open{display:flex}.result-card{width:min(100%,390px);padding:25px;text-align:center;border:1px solid #7cebdc55;border-radius:25px;background:radial-gradient(ellipse at top,#264d62,#15243a 65%);box-shadow:0 25px 80px #000b}.result-emblem{font-size:48px;color:var(--gold);text-shadow:0 0 24px #ffd16666}.result-card h2{font-size:34px;margin:4px 0 8px}.result-card p{color:var(--muted);font-size:13px}.result-stars{font-size:31px;letter-spacing:6px;color:var(--gold);margin:10px 0 18px}.pause-overlay{position:fixed;inset:0;z-index:60;background:#030812d9;backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}.pause-overlay.open{display:flex}.pause-card{width:min(100%,390px);padding:24px;border:1px solid #6b91b744;border-radius:24px;background:linear-gradient(145deg,#1c304b,#101a2c);box-shadow:0 25px 80px #0009}.pause-card h2{font-size:32px;margin:0 0 8px}.pause-card p{color:var(--muted);font-size:13px;margin:0 0 16px}.progressbar{margin-bottom:15px}
+@media(min-width:650px){.hero{padding-top:38px}.hero-art{width:360px}.home-grid{grid-template-columns:repeat(4,1fr)}.home-card{min-height:135px}.levels{grid-template-columns:repeat(10,minmax(0,1fr))}.board{width:min(100%,540px)}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(100%,700px);border:1px solid #7192b52e;border-bottom:0;border-radius:18px 18px 0 0}.app{padding-bottom:115px}}
+
 </style>
 </head>
 <body>
 <main class="app">
- <header class="top"><div class="logo">➜ <span>ARROW</span> PUZZLE PRO</div><div style="display:flex;align-items:center;gap:7px"><button type="button" class="install-btn" id="installBtn">＋ Install</button><div class="tag">ULTRA EDITION · PWA</div></div></header><div class="pwa-status" id="pwaStatus" aria-live="polite">Checking app status…</div>
- <h1>Think. Tap. Clear.</h1><p class="sub">Arrow ke saamne edge tak raasta khaali ho tabhi use tap karein. Board clear karke stars kamao, boss levels beat karo aur daily challenge try karo.</p>
- <section class="panel">
-  <div class="controls">
-   <div class="field"><label for="levelSelect">LEVEL</label><select id="levelSelect"></select></div>
-   <div class="field"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
-  </div>
-  <div class="featureline"><span class="chip" id="modeChip">CLASSIC</span><span class="chip" id="bossChip">BOSS LEVEL: EVERY 10</span><span class="chip" id="dailyChip">DAILY: AVAILABLE</span><span class="chip active" id="coinChip">🪙 0 COINS</span></div>
-  <div class="stats">
-   <div class="stat"><strong id="remaining">0</strong><small>ARROWS LEFT</small></div>
-   <div class="stat"><strong id="moves">0</strong><small>MOVES</small></div>
-   <div class="stat"><strong id="timer">00:00</strong><small>TIME</small></div>
-   <div class="stat"><strong id="stars">☆☆☆</strong><small>LEVEL STARS</small></div>
-  </div>
-  <div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div>
-  <div id="message" class="message" aria-live="polite">Choose a level and start clearing arrows.</div>
-  <div class="actions">
-   <button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button>
-  </div>
-  <div class="sectionhead" style="margin-top:15px"><h2>Power-ups</h2><span class="muted">Limited use per board</span></div>
-  <div class="actions">
-   <button class="btn gold" id="scanBtn">👁 Scan (2)</button><button class="btn" id="burstBtn">⚡ Clear (1)</button><button class="btn" id="shieldBtn">🛡 Shield (1)</button>
-  </div>
-  <div class="options">
-   <div class="toggle"><label for="skin">BOARD THEME</label><select id="skin"><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="light">Light</option></select></div>
-   <div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div>
-   <div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div>
-  </div>
-  <div class="sectionhead" style="margin-top:15px"><h2>Save Backup</h2><span class="muted">Move progress between browsers</span></div>
-  <div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div>
-  <input id="importFile" type="file" accept="application/json,.json" hidden>
-  <p class="info">💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
+ <header class="top"><button class="nav-icon" id="backBtn" aria-label="Back" style="display:none">‹</button><div class="logo">➜ <span>ARROW</span> PUZZLE PRO</div><div style="display:flex;align-items:center;gap:7px"><button type="button" class="install-btn" id="installBtn">＋ Install</button><button class="nav-icon" id="menuBtn" aria-label="Menu">☰</button><div class="tag">ULTRA · PWA</div></div></header>
+ <div class="pwa-status" id="pwaStatus" aria-live="polite">Checking app status…</div>
+ <section class="screen active" id="screen-home">
+  <div class="hero"><div class="eyebrow">ARROW PUZZLE PRO · SEASON 01</div><h1>Think.<br><span>Tap. Clear.</span></h1><p class="sub">Har arrow ko sahi order mein clear karo. 100 levels, boss fights aur daily challenges tumhara intezaar kar rahe hain.</p><div class="hero-art" aria-hidden="true"><div class="art-tile">↗</div><div class="art-tile">↑</div><div class="art-tile">↘</div><div class="art-tile">←</div><div class="art-tile glow">→</div><div class="art-tile">↓</div><div class="art-tile">↖</div><div class="art-tile">↙</div><div class="art-tile">↗</div></div><button class="btn primary big-btn" id="homePlay">▶ PLAY NOW</button><div class="home-mini-stats"><div><strong id="homeWins">0</strong><small>WINS</small></div><div><strong id="homeCoins">0</strong><small>COINS</small></div><div><strong id="homeProgress">0%</strong><small>PROGRESS</small></div></div></div>
+  <div class="home-grid"><button class="home-card" id="homeLevels"><span>▦</span><strong>Level Map</strong><small>Choose your stage</small></button><button class="home-card" id="homeDaily"><span>☀</span><strong>Daily Challenge</strong><small>New board every day</small></button><button class="home-card" id="homeRewards"><span>♜</span><strong>Rewards</strong><small>Coins & achievements</small></button><button class="home-card" id="homeSettings"><span>⚙</span><strong>Settings</strong><small>Themes, skins & save</small></button></div>
  </section>
- <div class="sectionhead"><h2>Daily Rewards</h2><span class="muted">Claim once per day</span></div>
- <section class="panel" style="padding:12px">
-  <div class="row"><div><strong id="rewardTitle">🎁 Daily login reward</strong><div class="muted" id="rewardText">Claim coins to unlock arrow skins.</div></div><button class="btn primary" id="claimBtn" type="button">Claim +10 🪙</button></div>
+ <section class="screen" id="screen-levels">
+  <div class="page-heading"><div class="eyebrow">YOUR JOURNEY</div><h1>Level Map</h1><p class="sub">Complete levels to unlock the next stages. Every 10th level is a Boss Level.</p></div>
+  <section class="panel"><div class="controls"><div class="field"><label for="levelSelect">START LEVEL</label><select id="levelSelect"></select></div><div class="field"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div></div><div class="row level-progress-row"><strong id="progressText">0 / 100 complete</strong><span class="muted">Levels</span></div><div class="progressbar"><div id="progressFill" class="progressfill"></div></div><div id="levels" class="levels"></div><button class="btn primary wide-btn" id="startSelected">PLAY SELECTED LEVEL →</button></section>
  </section>
- <div class="sectionhead"><h2>Level Map</h2><span class="muted" id="progressText">0 / 100 complete</span></div>
- <div class="progressbar"><div id="progressFill" class="progressfill"></div></div>
- <div id="levels" class="levels"></div>
- <div class="sectionhead"><h2>Achievements</h2><span class="muted">Unlock as you play</span></div>
- <section class="panel" style="padding:12px">
-  <div id="achievements" class="featureline"></div>
-  <div class="stats" style="margin-bottom:0">
-   <div class="stat"><strong id="totalWins">0</strong><small>WINS</small></div>
-   <div class="stat"><strong id="totalStars">0</strong><small>STARS</small></div>
-   <div class="stat"><strong id="bestStreak">0</strong><small>DAILY STREAK</small></div>
-   <div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div>
-  </div>
+ <section class="screen" id="screen-game">
+  <div class="game-head"><div><div class="eyebrow" id="gameEyebrow">LEVEL 1</div><h1 id="gameTitle">Level 1</h1></div><button class="btn pause-btn" id="pauseBtn">Ⅱ Pause</button></div>
+  <div class="game-meta"><span class="chip" id="modeChip">CLASSIC</span><span class="chip boss" id="bossChip">BOSS: EVERY 10</span><span class="chip active" id="dailyChip">DAILY</span><span class="chip active" id="coinChip">🪙 0 COINS</span></div>
+  <div class="stats"><div class="stat"><strong id="remaining">0</strong><small>ARROWS LEFT</small></div><div class="stat"><strong id="moves">0</strong><small>MOVES</small></div><div class="stat"><strong id="timer">00:00</strong><small>TIME</small></div><div class="stat"><strong id="stars">☆☆☆</strong><small>STARS</small></div></div>
+  <section class="panel game-panel"><div class="board-wrap"><div id="board" class="board" role="group" aria-label="Arrow puzzle board"></div></div><div id="message" class="message" aria-live="polite">Level ready. Clear the arrows!</div><div class="actions game-actions"><button class="btn gold" id="hintBtn">💡 Hint</button><button class="btn" id="undoBtn">↶ Undo</button><button class="btn" id="restartBtn">↻ Restart</button><button class="btn" id="shuffleBtn">⤨ New Board</button><button class="btn" id="soundBtn">🔊 Sound On</button><button class="btn primary" id="nextBtn">Next →</button></div><div class="sectionhead"><h2>Power-ups</h2><span class="muted">Limited per board</span></div><div class="actions power-actions"><button class="btn gold" id="scanBtn">👁 Scan (2)</button><button class="btn" id="burstBtn">⚡ Clear (1)</button><button class="btn" id="shieldBtn">🛡 Shield (1)</button></div></section>
  </section>
- <div class="footer">ARROW PUZZLE PRO · Single HTML · Mobile-first · Offline ready</div>
+ <section class="screen" id="screen-rewards">
+  <div class="page-heading"><div class="eyebrow">PLAY · EARN · UNLOCK</div><h1>Rewards</h1><p class="sub">Claim your daily coins and track your puzzle achievements.</p></div>
+  <section class="panel reward-panel"><div class="row"><div><strong id="rewardTitle">🎁 Daily login reward</strong><div class="muted" id="rewardText">Claim coins to unlock arrow skins.</div></div><button class="btn primary" id="claimBtn" type="button">Claim +10 🪙</button></div></section>
+  <div class="sectionhead"><h2>Achievements</h2><span class="muted">Unlock as you play</span></div><section class="panel"><div id="achievements" class="featureline"></div><div class="stats"><div class="stat"><strong id="totalWins">0</strong><small>WINS</small></div><div class="stat"><strong id="totalStars">0</strong><small>STARS</small></div><div class="stat"><strong id="bestStreak">0</strong><small>DAILY STREAK</small></div><div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div></div></section>
+ </section>
+ <section class="screen" id="screen-settings">
+  <div class="page-heading"><div class="eyebrow">MAKE IT YOURS</div><h1>Settings</h1><p class="sub">Customize your board and manage your saved progress.</p></div>
+  <section class="panel"><div class="settings-list"><div class="toggle"><label for="skin">BOARD THEME</label><select id="skin"><option value="neon">Neon</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option><option value="light">Light</option></select></div><div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div><div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div></div><div class="sectionhead"><h2>Save Backup</h2><span class="muted">Transfer progress</span></div><p class="info">Export your save before changing browser or device. Import restores a previous backup.</p><div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div><input id="importFile" type="file" accept="application/json,.json" hidden></section>
+ </section>
+ <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-screen="home"><span>⌂</span>Home</button><button class="nav-item" data-screen="levels"><span>▦</span>Levels</button><button class="nav-item play-nav" id="navPlay"><span>▶</span>Play</button><button class="nav-item" data-screen="rewards"><span>♜</span>Rewards</button><button class="nav-item" data-screen="settings"><span>⚙</span>Settings</button></nav>
+ <div class="footer">ARROW PUZZLE PRO · ULTRA PWA · MOBILE GAME</div>
+ <div class="result-overlay" id="resultOverlay"><div class="result-card"><div class="result-emblem" id="resultEmblem">★</div><div class="eyebrow">LEVEL COMPLETE</div><h2 id="resultTitle">Brilliant!</h2><p id="resultText">You cleared the board.</p><div class="result-stars" id="resultStars">★★★</div><button class="btn primary wide-btn" id="resultNext">Next Level →</button><button class="btn wide-btn" id="resultReplay">↻ Play Again</button><button class="btn wide-btn" id="resultLevels">▦ Level Map</button></div></div>
+ <div class="pause-overlay" id="pauseOverlay"><div class="pause-card"><div class="eyebrow">GAME PAUSED</div><h2>Take a breath.</h2><p>Your level progress is waiting.</p><button class="btn primary wide-btn" id="resumeBtn">▶ Resume Game</button><button class="btn wide-btn" id="pauseRestart">↻ Restart Level</button><button class="btn wide-btn" id="pauseLevels">▦ Level Map</button><button class="btn wide-btn" id="pauseHome">⌂ Main Menu</button></div></div>
 </main>
 <script>
 (()=> {
  'use strict';
+
  const $=id=>document.getElementById(id);
+ let currentScreen='home',lastScreen='home';
+ function showScreen(name){
+  const valid=['home','levels','game','rewards','settings']; if(!valid.includes(name))name='home';
+  if(name==='game')lastScreen='game';
+  if(name!=='game'&&timerHandle){elapsedBefore=getTime();startedAt=0;stopTimer();}
+  currentScreen=name;
+  if(name==='game'&&!timerHandle&&!finished)startTimer();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+name));
+  document.querySelectorAll('.nav-item[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));
+  $('backBtn').style.display=name==='home'?'none':'grid';
+  $('menuBtn').style.display=name==='game'?'none':'grid';
+  if(name==='home'){
+   const completed=Object.values(saved.levels||{}).filter(v=>v&&v.complete).length;
+   $('homeWins').textContent=saved.stats?.wins||completed;$('homeCoins').textContent=saved.coins||0;$('homeProgress').textContent=Math.min(100,Math.round(completed/100*100))+'%';
+  }
+  window.scrollTo({top:0,behavior:'instant'});
+ }
+ function goPlay(){showScreen('game');render();}
+
  const dirs=[{x:0,y:-1,ch:'↑',name:'up'},{x:1,y:0,ch:'→',name:'right'},{x:0,y:1,ch:'↓',name:'down'},{x:-1,y:0,ch:'←',name:'left'}];
  const configs={easy:{size:5,density:.53},medium:{size:6,density:.66},hard:{size:7,density:.72}};
  const themes={
@@ -180,6 +184,8 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
     if(clearRay(c,cells)){cells.push(c);break;}
    }
   }
+  // Guard against an empty board: generate a guaranteed solvable outward-facing fallback.
+  if(cells.length===0){for(let y=0;y<size;y++)for(let x=0;x<size;x++){let d;if(y===0)d=dirs[0];else if(x===size-1)d=dirs[1];else if(y===size-1)d=dirs[2];else if(x===0)d=dirs[3];else d=dirs[(x+y+level)%4];cells.push({x,y,d,gone:false});}}
   // Ensure a sensible board density for the selected mode.
   if(cells.length<5){
    for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(!cells.some(c=>c.x===x&&c.y===y)){
@@ -215,6 +221,8 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   $('remaining').textContent=left;$('moves').textContent=moves;$('timer').textContent=fmt(getTime());
   const rec=record();$('stars').textContent=rec?.stars?'★'.repeat(rec.stars)+'☆'.repeat(3-rec.stars):'☆☆☆';
   $('levelSelect').value=String(level);$('difficulty').value=diff;$('dailyMode').value=mode;
+  $('gameEyebrow').textContent=(mode==='daily'?'DAILY CHALLENGE':'LEVEL '+level)+(level%10===0&&mode==='classic'?' · BOSS':'');$('gameTitle').textContent=mode==='daily'?'Daily Challenge':'Level '+level;
+  $('homeWins').textContent=saved.stats?.wins||Object.values(saved.levels||{}).filter(v=>v&&v.complete).length;$('homeCoins').textContent=saved.coins||0;$('homeProgress').textContent=Math.min(100,Math.round(Object.values(saved.levels||{}).filter(v=>v&&v.complete).length/100*100))+'%';
   $('modeChip').textContent=mode==='daily'?'DAILY CHALLENGE':'CLASSIC';
   $('modeChip').className='chip '+(mode==='daily'?'active':'');
   $('bossChip').textContent=mode==='classic'&&level%10===0?'👑 BOSS LEVEL':'BOSS: EVERY 10';
@@ -236,7 +244,7 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
    if(all)completed++;
    const b=document.createElement('button');b.className='lv'+(n===level&&mode==='classic'?' current':'')+(all?' done':'');
    b.disabled=!unlocked(n);b.innerHTML=`${unlocked(n)?n:'🔒'}${n%10===0?'<small>👑 BOSS</small>':''}`;
-   b.addEventListener('click',()=>{level=n;mode='classic';$('dailyMode').value=mode;resetGame();window.scrollTo({top:0,behavior:'smooth'});});
+   b.addEventListener('click',()=>{level=n;mode='classic';$('dailyMode').value=mode;resetGame();showScreen('game');});
    box.appendChild(b);
   }
   $('progressText').textContent=`${completed} / 100 complete`;
@@ -246,7 +254,7 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   stopTimer();moves=0;hintIndex=-1;finished=false;history=[];elapsedBefore=0;startedAt=0;
   if(mode==='daily'&&saved.daily[id()]?.complete){dailyFinished=true;msg('Aaj ka Daily Challenge complete ho chuka hai. Replay karke apna score improve karo.');}
   else {dailyFinished=false;msg(mode==='daily'?`Daily Challenge · ${diff} · ${today()}`:`Level ${level} · ${diff[0].toUpperCase()+diff.slice(1)}${level%10===0?' · BOSS FIGHT':''}`);}
-  makeBoard();startTimer();render();
+  makeBoard();if(currentScreen==='game')startTimer();render();
  }
  function playTone(freq=600,duration=.07){
   if(!soundOn)return;
@@ -265,7 +273,7 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   finished=true;stopTimer();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
   const entry={complete:true,stars:Math.max(stars,old?.stars||0),bestMoves:Math.min(moves,old?.bestMoves??Infinity),bestTime:Math.min(t,old?.bestTime??Infinity),lastTime:t};
   if(mode==='daily')saved.daily[k]=entry;else saved.levels[k]=entry;
-  persist();msg(`🎉 ${mode==='daily'?'Daily Challenge':'Level '+level} complete! ${'★'.repeat(stars)} · ${moves} moves · ${fmt(t)}`,'good');playTone(880,.18);
+  persist();msg(`🎉 ${mode==='daily'?'Daily Challenge':'Level '+level} complete! ${'★'.repeat(stars)} · ${moves} moves · ${fmt(t)}`,'good');$('resultTitle').textContent=mode==='daily'?'Daily Challenge Clear!':'Level '+level+' Clear!';$('resultText').textContent=`${moves} moves · ${fmt(t)} · ${saved.coins||0} coins`; $('resultStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);$('resultNext').style.display=(mode==='daily'||level>=100)?'none':'block';$('resultOverlay').classList.add('open');playTone(880,.18);
  }
  $('levelSelect').innerHTML=Array.from({length:100},(_,i)=>`<option value="${i+1}">Level ${i+1}${(i+1)%10===0?' · Boss':''}</option>`).join('');
  $('levelSelect').addEventListener('change',e=>{level=+e.target.value;mode='classic';$('dailyMode').value=mode;resetGame();});
@@ -299,14 +307,7 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   }catch(err){msg('Backup file valid nahi hai. Export ki hui JSON file select karein.','warn');}finally{e.target.value='';}
  });
  $('resetSaveBtn').addEventListener('click',()=>{if(!confirm('Kya aap sure hain? Saare levels, coins aur achievements reset ho jayenge.'))return;localStorage.removeItem(storeKey);location.reload();});
- $('menuBtn').addEventListener('click',()=>openMenu());
- function openMenu(){ $('menuOverlay').classList.add('open'); }
- function closeMenu(){ $('menuOverlay').classList.remove('open'); }
- $('closeMenu').addEventListener('click',closeMenu);
- $('menuRestart').addEventListener('click',()=>{closeMenu();resetGame();});
- $('menuDaily').addEventListener('click',()=>{closeMenu();mode='daily';$('dailyMode').value='daily';resetGame();window.scrollTo({top:0,behavior:'smooth'});});
- $('menuContinue').addEventListener('click',closeMenu);$('menuLevels').addEventListener('click',()=>{closeMenu();document.getElementById('levels').scrollIntoView({behavior:'smooth',block:'start'});});
- $('menuOverlay').addEventListener('click',e=>{if(e.target===$('menuOverlay'))closeMenu();});
+
 
 
  $('scanBtn').addEventListener('click',()=>{
@@ -334,14 +335,38 @@ h1{font-size:clamp(32px,6.3vw,56px);letter-spacing:-1.7px;margin-top:clamp(24px,
   if(!history.length||finished){msg('Undo ke liye koi pichhla move nahi hai.','warn');return;}
   const prev=history.pop();cells=prev.cells;moves=prev.moves;hintIndex=-1;render();msg('Pichhla move undo ho gaya.','good');playTone(420,.05);
  });
- $('restartBtn').addEventListener('click',resetGame);
- $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
+ $('restartBtn').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');resetGame();});
+ $('shuffleBtn').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
  $('nextBtn').addEventListener('click',()=>{
+  $('resultOverlay').classList.remove('open');
   if(mode==='daily'){mode='classic';$('dailyMode').value=mode;}
   if(level<100){level=Math.min(100,level+1);resetGame();window.scrollTo({top:0,behavior:'smooth'});}
   else {msg('Aap Level 100 par hain! Difficulty badal kar ya Daily Challenge khel kar dekhein.','good');}
  });
+
+ // Level-clear result screen actions.
+ $('resultNext').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');if(level<100){level++;mode='classic';$('dailyMode').value=mode;resetGame();goPlay();}else showScreen('levels');});
+ $('resultReplay').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');resetGame();goPlay();});
+ $('resultLevels').addEventListener('click',()=>{$('resultOverlay').classList.remove('open');showScreen('levels');});
+ // Page-by-page navigation and pause/resume controls.
+ document.querySelectorAll('.nav-item[data-screen]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen)));
+ $('homePlay').addEventListener('click',()=>{mode='classic';$('dailyMode').value='classic';resetGame();goPlay();});
+ $('homeLevels').addEventListener('click',()=>showScreen('levels'));
+ $('homeDaily').addEventListener('click',()=>{mode='daily';$('dailyMode').value='daily';resetGame();goPlay();});
+ $('homeRewards').addEventListener('click',()=>showScreen('rewards'));
+ $('homeSettings').addEventListener('click',()=>showScreen('settings'));
+ $('navPlay').addEventListener('click',()=>goPlay());
+ $('startSelected').addEventListener('click',()=>{level=+$('levelSelect').value||1;mode='classic';$('dailyMode').value=mode;resetGame();goPlay();});
+ $('backBtn').addEventListener('click',()=>showScreen(currentScreen==='game'?'levels':'home'));
+ $('menuBtn').addEventListener('click',()=>showScreen('home'));
+ $('pauseBtn').addEventListener('click',()=>{elapsedBefore=getTime();startedAt=0;stopTimer();$('pauseOverlay').classList.add('open');});
+ $('resumeBtn').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');if(!finished)startTimer();});
+ $('pauseRestart').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');resetGame();goPlay();});
+ $('pauseLevels').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');showScreen('levels');});
+ $('pauseHome').addEventListener('click',()=>{$('pauseOverlay').classList.remove('open');showScreen('home');});
+ $('levelSelect').addEventListener('change',()=>{if(currentScreen==='levels')$('startSelected').textContent='PLAY LEVEL '+$('levelSelect').value+' →';});
+
  document.addEventListener('keydown',e=>{
   if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;
   if(e.key.toLowerCase()==='h')$('hintBtn').click();

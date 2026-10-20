@@ -1,0 +1,17 @@
+{
+  "name": "arrow-puzzle-ultra-android",
+  "version": "17.0.0",
+  "private": true,
+  "description": "Capacitor Android wrapper for Arrow Puzzle ULTRA v17 with Pro options",
+  "scripts": {
+    "android:sync": "cap sync android",
+    "android:open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.1",
+    "@capacitor/core": "^6.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.1"
+  }
+}

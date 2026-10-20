@@ -1,14 +1,14 @@
 {
   "id": "./",
-  "name": "Arrow Puzzle ULTRA v13",
-  "short_name": "Arrow Puzzle",
-  "description": "Mobile-first arrow puzzle with smart coaching, ranked hints, pause, daily missions and rewards.",
+  "name": "Arrow Puzzle ULTRA v17 — Ultra Pro Edition",
+  "short_name": "Arrow Puzzle v17",
+  "description": "Mobile-first arrow puzzle with saved Pro controls, high contrast, reduced motion, haptic feedback and Android app build support.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0c1422",
-  "theme_color": "#0c1422",
+  "orientation": "any",
+  "background_color": "#edf6ff",
+  "theme_color": "#edf6ff",
   "categories": [
     "games",
     "puzzle"

@@ -1,13 +1,15 @@
-ARROW PUZZLE ULTRA v13 — AUTOMATED TEST REPORT
-
-PASS: Main HTML JavaScript syntax checked with Node.js.
-PASS: Service worker JavaScript syntax checked with Node.js.
-PASS: HTML IDs checked — 92 IDs, 0 duplicates.
-PASS: PWA manifest parses as JSON.
-PASS: ZIP archive integrity verified.
-PASS: Service worker registration snippet present for HTTP(S) hosting.
-PASS: Smart Coach button and click handler are present.
-
-Smart Coach implementation: evaluates all currently legal moves, simulates each candidate removal, and prioritizes moves estimated to unlock additional safe moves. Smart Hint uses the same ranking.
-
-NOT VERIFIED: full interactive browser gameplay, physical Android installation, or offline launch on a device. Those require runtime testing after deployment.
+Arrow Puzzle ULTRA v17 — Static Test Report
+==========================================
+HTML file size: 74892 bytes
+HTML IDs: 98
+Duplicate HTML IDs: 0
+Pro option controls: all 5 expected controls present
+Saved preferences: localStorage-backed via existing save object
+Haptic feedback: guarded by navigator.vibrate availability
+Service worker cache: arrow-puzzle-v17
+Manifest JSON: valid
+Android build workflow: v17 debug artifact configured
+ZIP integrity: checked after packaging
+JavaScript syntax: checked with Node.js
+Real Android device/browser gameplay: not tested in this environment
+APK: not yet built; GitHub Actions must run successfully first

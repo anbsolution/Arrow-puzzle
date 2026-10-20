@@ -2,9 +2,9 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0c1422">
-<title>Arrow Puzzle ULTRA v13 — Smart Coach Edition</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf6ff">
+<title>Arrow Puzzle ULTRA v16 — Android App Edition</title>
 <style>
 :root{--bg:#0c1422;--panel:#152238;--panel2:#1d2d46;--text:#f3f7ff;--muted:#a6b5cb;--accent:#5df0c2;--gold:#ffd166;--danger:#ff7272;--tile:#20334d;--empty:#101b2d;--line:#304660}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203956 0,var(--bg) 62%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
@@ -81,6 +81,76 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
 .coach-btn{border-color:#8db9ff;background:linear-gradient(135deg,#eef6ff,#dceaff);color:#174d9a;font-weight:900}
 .coach-btn:active{transform:translateY(1px) scale(.99)}
 @media (prefers-reduced-motion:reduce){.coach-btn{transition:none!important}}
+
+
+/* ULTRA v14 — dedicated mobile-first layout, safe-area support and touch sizing */
+html{min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:12px;overscroll-behavior-y:contain}
+body{min-height:100vh;min-height:100dvh;padding:0;overflow-x:hidden;overscroll-behavior-x:none}
+.app{width:100%;max-width:620px;margin-inline:auto;padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right));padding-top:max(10px,env(safe-area-inset-top));padding-bottom:calc(26px + env(safe-area-inset-bottom))}
+button,select{touch-action:manipulation}button{-webkit-tap-highlight-color:transparent}select{max-width:100%}
+.board{max-width:min(520px,100%);width:100%;user-select:none;-webkit-user-select:none}
+.cell{min-width:0;min-height:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.btn,.icon-btn,.lv{min-height:44px}
+@media(max-width:520px){
+ .app{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+ .top{gap:6px;padding:8px 9px;border-radius:15px}
+ .logo{font-size:clamp(13px,3.8vw,17px);white-space:nowrap}
+ .top-right{gap:5px}.tag{font-size:9px;padding:6px 7px;letter-spacing:-.1px}
+ .icon-btn{width:38px;height:40px;min-width:38px;flex:0 0 auto}
+ h1{font-size:clamp(31px,8.5vw,43px);margin:19px 3px 7px;letter-spacing:-1.3px}
+ .sub{font-size:13px;line-height:1.45;margin:0 3px 13px}
+ .panel{padding:11px!important;border-radius:21px!important}
+ .controls{gap:7px}.field select{font-size:16px!important;min-height:44px;padding:10px 9px!important}
+ .featureline{gap:5px;margin-top:9px}.chip{font-size:10px;padding:5px 7px}
+ .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:10px 0}
+ .stat{padding:8px 2px!important;border-radius:12px!important;min-width:0}
+ .stat strong{font-size:clamp(16px,4.8vw,22px)!important}.stat small{font-size:8px;letter-spacing:0;line-height:1.2}
+ .board-wrap{padding:6px 0 10px;width:100%}
+ .board{width:min(100%,calc(100vw - 48px))!important;max-width:520px;padding:5px!important;border-radius:18px!important}
+ .cell{font-size:clamp(14px,4.7vw,27px);border-radius:5px}
+ .actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .actions .btn{min-width:0;min-height:46px;padding:10px 6px;font-size:12px;line-height:1.15;overflow-wrap:anywhere}
+ .options{grid-template-columns:1fr;gap:7px}.toggle{min-height:48px;padding:9px 10px}.toggle select{font-size:14px;min-height:34px;max-width:58%}
+ .sectionhead{margin:18px 2px 9px;align-items:flex-end}.sectionhead h2{font-size:16px}.muted{font-size:10px}
+ .levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.lv{padding:9px 0;min-width:0}.lv small{font-size:8px}
+ .challenge-card,.mission-card{grid-template-columns:38px minmax(0,1fr) auto;gap:7px;padding:9px}
+ .challenge-trophy,.mission-icon{width:36px;height:36px;border-radius:11px;font-size:20px}
+ .challenge-side{min-width:46px}.mission-side{min-width:54px}
+ .challenge-name,.mission-title{font-size:12px}.challenge-reward,.mission-sub{font-size:10px}
+ .overlay{padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))}
+ .overlay-card,.menu-card{max-height:calc(100dvh - 24px);overflow:auto;padding:16px}
+ .footer{font-size:10px;padding-bottom:env(safe-area-inset-bottom)}
+}
+@media(max-width:360px){
+ .tag{display:none}.top{padding:7px 8px}.logo{font-size:14px}
+ .board{width:min(100%,calc(100vw - 36px))!important}
+ .stats{gap:4px}.stat small{font-size:7px}
+ .featureline .chip{font-size:9px;padding:5px 6px}
+ .actions .btn{font-size:11px;padding-inline:4px}
+ .levels{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-height:560px) and (orientation:landscape){
+ .app{max-width:100%;padding:8px 12px 20px}
+ .top{padding:6px 9px}.app>h1{font-size:28px;margin:12px 3px 5px}.sub{margin-bottom:8px}
+ .board{width:min(56vw,calc(100dvh - 220px))!important;max-width:420px}
+ .panel{padding:10px!important}.stats{margin:7px 0}.board-wrap{padding:3px 0 6px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+
+.pro-options{display:grid;grid-template-columns:1fr;gap:8px;margin:10px 0 16px}
+.pro-option{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--tile) 75%,transparent);cursor:pointer;min-height:56px}
+.pro-option span{display:grid;gap:3px}.pro-option strong{font-size:13px}.pro-option small{font-size:11px;color:var(--muted,#9baec4);line-height:1.35}
+.pro-option input{width:22px;height:22px;flex:0 0 auto;accent-color:var(--accent)}
+body.pro-large-controls .btn,body.pro-large-controls .icon-btn{min-height:48px;font-size:14px}
+body.pro-large-controls .cell{min-width:34px;min-height:34px;font-size:clamp(20px,5vw,32px)}
+body.pro-high-contrast .cell{border:2px solid currentColor;box-shadow:inset 0 0 0 1px var(--accent);font-weight:900}
+body.pro-high-contrast .cell.empty{border:1px dashed var(--text);opacity:.9}
+body.pro-direction-labels .cell:not(.empty){font-size:0;position:relative}
+body.pro-direction-labels .cell:not(.empty)::after{content:attr(data-direction);font-size:10px;font-weight:900;position:absolute;right:2px;bottom:1px;line-height:1;opacity:.95;text-transform:uppercase}
+body.pro-reduced-motion *,body.pro-reduced-motion *::before,body.pro-reduced-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+@media(min-width:560px){.pro-options{grid-template-columns:repeat(2,minmax(0,1fr))}.pro-option:last-child{grid-column:1/-1}}
+
 </style>
 </head>
 <body>
@@ -113,6 +183,14 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
    <div class="toggle"><label for="arrowSkin">ARROW SKIN</label><select id="arrowSkin"><option value="classic">Classic</option><option value="crystal">Crystal · 20 coins</option><option value="fire">Fire · 35 coins</option><option value="gold">Gold · 50 coins</option></select></div>
    <div class="toggle"><label for="dailyMode">CHALLENGE MODE</label><select id="dailyMode"><option value="classic">Classic</option><option value="daily">Daily Challenge</option></select></div>
   </div>
+  <div class="sectionhead"><h2>⚙️ ULTRA PRO Options</h2><span class="muted">Personalize your mobile game</span></div>
+  <div class="pro-options" id="proOptions">
+   <label class="pro-option"><span><strong>Large touch controls</strong><small>Buttons and arrows are easier to tap</small></span><input type="checkbox" id="optLargeControls"></label>
+   <label class="pro-option"><span><strong>High contrast board</strong><small>Stronger outlines for better visibility</small></span><input type="checkbox" id="optHighContrast"></label>
+   <label class="pro-option"><span><strong>Reduced motion</strong><small>Minimize visual movement and animations</small></span><input type="checkbox" id="optReducedMotion"></label>
+   <label class="pro-option"><span><strong>Haptic feedback</strong><small>Short vibration on supported Android devices</small></span><input type="checkbox" id="optHaptics"></label>
+   <label class="pro-option"><span><strong>Directional labels</strong><small>Show arrow direction labels for clarity</small></span><input type="checkbox" id="optDirectionLabels"></label>
+  </div>
   <div class="sectionhead"><h2>🎡 Daily Spin</h2><span class="muted">One free spin each day</span></div>
  <section class="panel reward-arcade">
   <div class="spin-card">
@@ -133,7 +211,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  <div class="sectionhead" style="margin-top:15px"><h2>Save Backup</h2><span class="muted">Move progress between browsers</span></div>
   <div class="actions"><button class="btn" id="exportBtn">⬇ Export Save</button><button class="btn" id="importBtn">⬆ Import Save</button><button class="btn" id="resetSaveBtn">🗑 Reset Save</button></div>
   <input id="importFile" type="file" accept="application/json,.json" hidden>
-  <p class="info">⏸ Smart Coach ya C key se best next move dekhein. Pause button ya P key se timer rok sakte hain. App/tab chhodne par game auto-pause hota hai. 💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein.</p>
+  <p class="info">⏸ Smart Coach ya C key se best next move dekhein. Pause button ya P key se timer rok sakte hain. App/tab chhodne par game auto-pause hota hai. 💡 Hint ek valid move dikhata hai. Undo pichhla move wapas karta hai. Har 10th level ek Boss Level hai. Daily Challenge ka board date ke hisaab se badalta hai. Progress, stars aur best time isi browser mein save hote hain. Export Save se backup file banayein. App reload ya accidental close hone par unfinished board auto-restore hota hai.</p>
  </section>
  <div class="sectionhead"><h2>Daily Rewards</h2><span class="muted">Claim once per day</span></div>
  <section class="panel" style="padding:12px">
@@ -161,7 +239,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
    <div class="stat"><strong id="totalMoves">0</strong><small>MOVES</small></div>
   </div>
  </section>
- <div class="footer">ARROW PUZZLE ULTRA v11 · 500 LEVELS · DAILY MISSIONS · REWARD ARCADE</div>
+ <div class="footer">ARROW PUZZLE ULTRA v17 · ULTRA PRO OPTIONS · ANDROID APP EDITION · 500 LEVELS</div>
 </main>
 <div class="overlay" id="homeOverlay" role="dialog" aria-modal="true" aria-labelledby="homeTitle">
  <section class="overlay-card home-card">
@@ -208,7 +286,8 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  let level=1,diff='easy',mode='classic',size=5,cells=[],moves=0,hintIndex=-1,finished=false,history=[],soundOn=true,boardVersion=0;
  let startedAt=0,elapsedBefore=0,timerHandle=null,dailyFinished=false,paused=false,power={scan:2,burst:1,shield:1},shieldReady=false,scanActive=false;
  const storeKey='arrowPuzzlePro_v3';
- let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',coins:0,claimedDay:'',challengeClaims:[],unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
+ const activeKey='arrowPuzzleActive_v17';
+ let saved={levels:{},daily:{},theme:'neon',arrowSkin:'classic',proOptions:{largeControls:false,highContrast:false,reducedMotion:false,haptics:false,directionLabels:false},coins:0,claimedDay:'',challengeClaims:[],unlockedSkins:['classic'],sound:true,stats:{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:{}};
  try{const x=JSON.parse(localStorage.getItem(storeKey)||'null');if(x&&typeof x==='object')saved={...saved,...x,levels:x.levels||{},daily:x.daily||{},stats:x.stats||{wins:0,stars:0,moves:0,bestStreak:0,streak:0,lastDaily:''},achievements:x.achievements||{},unlockedSkins:x.unlockedSkins||['classic'],coins:x.coins||0,claimedDay:x.claimedDay||'',challengeClaims:x.challengeClaims||[],arrowSkin:x.arrowSkin||'classic'};}catch(e){}
  function ensureMissions(){
   if(!saved.missions||saved.missions.date!==today())saved.missions={date:today(),moves:0,hints:0,clears:0,claimed:[]};
@@ -287,6 +366,18 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  function pauseGame(auto=false){if(finished||paused)return;elapsedBefore=getTime();startedAt=0;stopTimer();paused=true;$('pauseMoves').textContent=String(moves);$('pauseTime').textContent=fmt(elapsedBefore);$('pauseLeft').textContent=String(cells.filter(c=>!c.gone).length);$('pauseOverlay').classList.add('open');$('pauseBtn').textContent='▶ Resume';$('pauseBtn').setAttribute('aria-label','Resume game');if(!auto)msg('Game paused. Timer stopped.','good');}
  function resumeGame(){if(!paused)return;paused=false;$('pauseOverlay').classList.remove('open');$('pauseBtn').textContent='Ⅱ Pause';$('pauseBtn').setAttribute('aria-label','Pause game');startTimer();msg('Back in the game. Good luck!','good');}
  function starsFor(t,m){const fast=Math.max(20,cells.length*3),steady=Math.max(45,cells.length*6);if(t<=fast)return 3;if(t<=steady)return 2;return 1;}
+ function applyProOptions(){
+  const defaults={largeControls:false,highContrast:false,reducedMotion:false,haptics:false,directionLabels:false};
+  saved.proOptions={...defaults,...(saved.proOptions||{})};
+  const map={optLargeControls:'largeControls',optHighContrast:'highContrast',optReducedMotion:'reducedMotion',optHaptics:'haptics',optDirectionLabels:'directionLabels'};
+  Object.entries(map).forEach(([element,key])=>{const input=$(element);if(input)input.checked=!!saved.proOptions[key];});
+  document.body.classList.toggle('pro-large-controls',!!saved.proOptions.largeControls);
+  document.body.classList.toggle('pro-high-contrast',!!saved.proOptions.highContrast);
+  document.body.classList.toggle('pro-reduced-motion',!!saved.proOptions.reducedMotion);
+  document.body.classList.toggle('pro-direction-labels',!!saved.proOptions.directionLabels);
+ }
+ function setProOption(key,value){saved.proOptions=saved.proOptions||{};saved.proOptions[key]=!!value;applyProOptions();persist();if(key==='haptics'&&value&&navigator.vibrate)navigator.vibrate(18);}
+ function proHaptic(ms=18){if(saved.proOptions?.haptics&&navigator.vibrate){try{navigator.vibrate(ms);}catch(e){}}}
  function applyTheme(name){
   const t=themes[name]||themes.neon;const r=document.documentElement;
   r.style.setProperty('--bg',t.bg);r.style.setProperty('--tile',t.tile);r.style.setProperty('--empty',t.empty);r.style.setProperty('--line',t.line);r.style.setProperty('--accent',t.accent);r.style.setProperty('--text',t.text);
@@ -326,7 +417,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
    const b=document.createElement('button');b.type='button';
    b.className='cell'+(!c||c.gone?' empty':'')+(c&&i===hintIndex?' hint':'')+(c&&!c.gone&&scanActive&&clearRay(c)?' hint':'');
    b.textContent=c&&!c.gone?c.d.ch:'';
-   b.setAttribute('aria-label',c&&!c.gone?`Arrow ${c.d.name}`:'Empty cell');
+   b.setAttribute('aria-label',c&&!c.gone?`Arrow ${c.d.name}`:'Empty cell');if(c&&!c.gone)b.setAttribute('data-direction',c.d.name);
    b.disabled=!c||c.gone||finished;
    if(c&&!c.gone)b.addEventListener('click',()=>tap(i));
    board.appendChild(b);
@@ -342,6 +433,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   $('dailyChip').textContent=`DAILY · ${today()}`;$('coinChip').textContent=`🪙 ${saved.coins||0} COINS`;$('arrowSkin').value=saved.arrowSkin||'classic';
   $('soundBtn').textContent=soundOn?'🔊 Sound On':'🔇 Sound Off';
   renderLevels();renderChallenges();renderShop();renderMissions();
+  saveActiveGame();
  }
  function unlocked(n){
   if(n===1)return true;
@@ -385,7 +477,27 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  }
  function openHome(){renderHome();$('homeOverlay').classList.add('open');}
  function closeHome(){$('homeOverlay').classList.remove('open');}
+ function saveActiveGame(){
+  try{
+   if(finished||!cells.length){localStorage.removeItem(activeKey);return;}
+   const snapshot={version:15,savedAt:Date.now(),level,diff,mode,size,cells:cells.map(c=>({...c,d:{...c.d}})),moves,elapsed:getTime(),boardVersion,power:{...power},shieldReady,scanActive,history:history.map(h=>({moves:h.moves,cells:h.cells.map(c=>({...c,d:{...c.d}}))}))};
+   localStorage.setItem(activeKey,JSON.stringify(snapshot));
+  }catch(e){}
+ }
+ function restoreActiveGame(){
+  try{
+   const raw=localStorage.getItem(activeKey);if(!raw)return false;
+   const s=JSON.parse(raw);
+   if(!s||s.version!==15||!Array.isArray(s.cells)||!s.cells.length||!['easy','medium','hard'].includes(s.diff)||!['classic','daily'].includes(s.mode)||!Number.isInteger(s.level)||s.level<1||s.level>500)return false;
+   if(s.mode==='daily'&&s.savedAt&&new Date(s.savedAt).toDateString()!==new Date().toDateString())return false;
+   const validCells=s.cells.every(c=>Number.isInteger(c.x)&&Number.isInteger(c.y)&&c.x>=0&&c.y>=0&&c.x<s.size&&c.y<s.size&&c.d&&Number.isInteger(c.d.x)&&Number.isInteger(c.d.y));
+   if(!validCells)return false;
+   level=s.level;diff=s.diff;mode=s.mode;size=s.size;cells=s.cells.map(c=>({...c,d:{...c.d}}));moves=Math.max(0,Number(s.moves)||0);elapsedBefore=Math.max(0,Number(s.elapsed)||0);startedAt=0;boardVersion=Number(s.boardVersion)||0;power={scan:2,burst:1,shield:1,...s.power};shieldReady=!!s.shieldReady;scanActive=!!s.scanActive;history=Array.isArray(s.history)?s.history.slice(-100):[];hintIndex=-1;finished=false;paused=true;stopTimer();
+   $('pauseOverlay').classList.add('open');$('pauseMoves').textContent=String(moves);$('pauseTime').textContent=fmt(elapsedBefore);$('pauseLeft').textContent=String(cells.filter(c=>!c.gone).length);$('pauseBtn').textContent='▶ Resume';$('pauseBtn').setAttribute('aria-label','Resume game');render();msg('↻ Previous game restored. Tap Resume to continue.','good');return true;
+  }catch(e){try{localStorage.removeItem(activeKey)}catch(_e){}return false;}
+ }
  function resetGame(){
+  try{localStorage.removeItem(activeKey)}catch(e){}
   stopTimer();moves=0;hintIndex=-1;finished=false;paused=false;$('pauseOverlay').classList.remove('open');$('pauseBtn').textContent='Ⅱ Pause';$('pauseBtn').setAttribute('aria-label','Pause game');history=[];elapsedBefore=0;startedAt=0;
   if(mode==='daily'&&saved.daily[id()]?.complete){dailyFinished=true;msg('Aaj ka Daily Challenge complete ho chuka hai. Replay karke apna score improve karo.');}
   else {dailyFinished=false;msg(mode==='daily'?`Daily Challenge · ${diff} · ${today()}`:`Level ${level} · ${diff[0].toUpperCase()+diff.slice(1)}${level%10===0?' · BOSS FIGHT':''}`);}
@@ -397,14 +509,15 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  }
  function tap(i){
   const c=cells[i];if(!c||c.gone||finished||paused)return;
-  if(!clearRay(c)){if(shieldReady){shieldReady=false;msg('🛡 Shield ne blocked move ko protect kiya.','good');playTone(360,.08);}else{msg('Raasta blocked hai. Pehle saamne wala arrow hatao.','warn');playTone(180,.08);}return;}
+  if(!clearRay(c)){proHaptic(10);if(shieldReady){shieldReady=false;msg('🛡 Shield ne blocked move ko protect kiya.','good');playTone(360,.08);}else{msg('Raasta blocked hai. Pehle saamne wala arrow hatao.','warn');playTone(180,.08);}return;}
   history.push({cells:cells.map(v=>({...v,d:{...v.d}})),moves});
-  c.gone=true;moves++;ensureMissions().moves++;hintIndex=-1;scanActive=false;playTone(680,.045);
+  c.gone=true;moves++;ensureMissions().moves++;hintIndex=-1;scanActive=false;proHaptic(22);playTone(680,.045);
   if(cells.every(v=>v.gone))completeGame();
   else {const safe=availableMoves().length;msg(`Nice move! ${safe} safe move${safe===1?'':'s'} available. ${safe>0?'Smart Coach can suggest the best one.':'Keep going carefully.'}`,'good');}
   render();
  }
  function completeGame(){
+  try{localStorage.removeItem(activeKey)}catch(e){}
   finished=true;paused=false;$('pauseOverlay').classList.remove('open');stopTimer();ensureMissions().clears++;persist();const t=getTime(),stars=starsFor(t,moves),k=id(),old=record();
   const entry={complete:true,stars:Math.max(stars,old?.stars||0),bestMoves:Math.min(moves,old?.bestMoves??Infinity),bestTime:Math.min(t,old?.bestTime??Infinity),lastTime:t};
   if(mode==='daily')saved.daily[k]=entry;else saved.levels[k]=entry;
@@ -523,6 +636,7 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
  $('restartBtn').addEventListener('click',resetGame);
  $('shuffleBtn').addEventListener('click',()=>{boardVersion++;resetGame();msg('Naya solvable board ready!','good');});
  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;saved.sound=soundOn;persist();render();playTone(550,.05);});
+ [['optLargeControls','largeControls'],['optHighContrast','highContrast'],['optReducedMotion','reducedMotion'],['optHaptics','haptics'],['optDirectionLabels','directionLabels']].forEach(([element,key])=>$(element).addEventListener('change',e=>{setProOption(key,e.target.checked);render();msg('ULTRA PRO option updated.','good');}));
  $('nextBtn').addEventListener('click',()=>{
   if(mode==='daily'){mode='classic';$('dailyMode').value=mode;}
   if(level<500){level=Math.min(500,level+1);resetGame();window.scrollTo({top:0,behavior:'smooth'});}
@@ -538,13 +652,13 @@ h1{margin:26px 4px 8px;font-size:clamp(34px,9vw,48px);line-height:1.02;letter-sp
   if(e.key.toLowerCase()==='u')$('undoBtn').click();
   if(e.key.toLowerCase()==='r')$('restartBtn').click();
  });
- soundOn=saved.sound!==false;$('skin').value=saved.theme||'neon';applyTheme(saved.theme||'neon');
- resetGame();
+ soundOn=saved.sound!==false;applyProOptions();$('skin').value=saved.theme||'neon';applyTheme(saved.theme||'neon');
+ if(!restoreActiveGame())resetGame();
 })();
 </script>
 
 <script>
-if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+if (!window.Capacitor && 'serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
 </script>

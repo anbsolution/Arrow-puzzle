@@ -1,0 +1,9 @@
+{
+  "appId": "com.anbsolution.arrowpuzzle",
+  "appName": "Arrow Puzzle ULTRA",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false
+  }
+}
